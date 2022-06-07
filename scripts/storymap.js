@@ -96,7 +96,7 @@ $(window).on('load', function() {
 
     document.title = getSetting('_mapTitle');
     $('#header').append('<h1>' + (getSetting('_mapTitle') || '') + '</h1>');
-    $('#header').append('<h2>' + (getSetting('_mapSubtitle') || '') + '</h2>');
+    $('#header').append('<p class="map-subtitle">' + (getSetting('_mapSubtitle') || '') + '</p>');
 
     // Add logo
     if (getSetting('_mapLogo')) {
@@ -245,9 +245,11 @@ $(window).on('load', function() {
           class: mediaType + '-container'
         }).append(media).after(source);
       }
-
+      
+      if (c['Chapter']) {
+        container.append('<h2 class="chapter-header">' + c['Chapter'] + '</h2>')
+      };
       container
-        .append('<p class="chapter-header">' + c['Chapter'] + '</p>')
         .append(media ? mediaContainer : '')
         .append(media ? source : '')
         .append('<p class="description">' + c['Description'] + '</p>');
@@ -290,7 +292,7 @@ $(window).on('load', function() {
         ) {
 
           // Update URL hash
-          location.hash = i + 2;
+          location.hash = i + 1;
 
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
@@ -393,23 +395,6 @@ $(window).on('load', function() {
       </div> \
     ");
 
-    /* Generate a CSS sheet with cosmetic changes */
-    $("<style>")
-      .prop("type", "text/css")
-      .html("\
-      #narration, #title {\
-        background-color: " + trySetting('_narrativeBackground', 'white') + "; \
-        color: " + trySetting('_narrativeText', 'black') + "; \
-      }\
-      a, a:visited, a:hover {\
-        color: " + trySetting('_narrativeLink', 'blue') + " \
-      }\
-      .in-focus {\
-        background-color: " + trySetting('_narrativeActive', '#f0f0f0') + " \
-      }")
-      .appendTo("head");
-
-
     endPixels = parseInt(getSetting('_pixelsAfterFinalChapter'));
     if (endPixels > 100) {
       $('#space-at-the-bottom').css({
@@ -465,29 +450,11 @@ $(window).on('load', function() {
 
 
   /**
-   * Changes map attribution (author, GitHub repo, email etc.) in bottom-right
+   * Changes map attribution text in bottom-right
    */
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
-    var credit = 'View <a href="'
-      // Show Google Sheet URL if the variable exists and is not empty, otherwise link to Chapters.csv
-      + (typeof googleDocURL !== 'undefined' && googleDocURL ? googleDocURL : './csv/Chapters.csv')
-      + '" target="_blank">data</a>';
-
-    var name = getSetting('_authorName');
-    var url = getSetting('_authorURL');
-
-    if (name && url) {
-      if (url.indexOf('@') > 0) { url = 'mailto:' + url; }
-      credit += ' by <a href="' + url + '">' + name + '</a> | ';
-    } else if (name) {
-      credit += ' by ' + name + ' | ';
-    } else {
-      credit += ' | ';
-    }
-
-    credit += 'View <a href="' + getSetting('_githubRepo') + '">code</a>';
-    if (getSetting('_codeCredit')) credit += ' by ' + getSetting('_codeCredit');
+    var credit = trySetting('_attributionText', '');
     credit += ' with ';
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
