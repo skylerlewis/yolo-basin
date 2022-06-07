@@ -210,6 +210,40 @@ $(window).on('load', function() {
         }).append(media).after(source);
       }
 
+      // Gallery
+      
+      if (c['Media Link'] && c['Media Link'].substring(0, 1) == '[') {
+        mediaContainer = $('<div></div>', {
+          class: 'gallery-container'
+        })
+
+        var galleryItems = JSON.parse(c['Media Link']);
+        
+        for (i in galleryItems) {
+          media = $('<img>', {
+            src: galleryItems[i],
+            alt: c['Chapter'],
+            class: i == 0 ? 'gallery-first-item' : 'gallery-other-item',
+          });  
+
+          var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
+          if (enableLightbox) {
+            var lightboxWrapper = $('<a></a>', {
+              'data-lightbox': galleryItems,
+              'href': galleryItems[i],
+              // 'data-title': c['Chapter'],
+              // 'data-alt': c['Chapter'],
+            });
+            media = lightboxWrapper.append(media);
+          };
+          
+          mediaContainer.append(media);
+
+        }
+
+        mediaContainer.after(source);
+      }
+
       // If not YouTube: either audio or image
       var mediaTypes = {
         'jpg': 'img',
@@ -237,8 +271,8 @@ $(window).on('load', function() {
           var lightboxWrapper = $('<a></a>', {
             'data-lightbox': c['Media Link'],
             'href': c['Media Link'],
-            'data-title': c['Chapter'],
-            'data-alt': c['Chapter'],
+            // 'data-title': c['Chapter'],
+            // 'data-alt': c['Chapter'],
           });
           media = lightboxWrapper.append(media);
         }

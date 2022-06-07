@@ -100,6 +100,17 @@ body {
   width: 100%;
 }
 
+.gallery-container {
+  margin: 0;
+  margin-bottom: 5px;
+  height: 200px;
+  max-height: 200px;
+  width: 100%;
+  background-image: url('../scripts/lightbox/images/next.png');
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
 .chapter-header {
   display: block;
   text-align: center;
@@ -192,4 +203,8 @@ h2 {
 
 a, a:visited, a:hover {
   color: #6388b6; 
+}
+
+.gallery-other-item {
+  display: none;
 }
