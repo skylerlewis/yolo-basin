@@ -111,6 +111,7 @@ body {
   font-size: 9pt;
   font-style: italic;
   color: gray;
+  padding: 0 20px;
 }
 a.source:visited {
   color: grey;
