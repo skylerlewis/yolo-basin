@@ -85,14 +85,16 @@ $(window).on('load', function() {
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
     L.tileLayer.provider(basemap, {
-      maxZoom: 18
+        maxZoom: 16, 
+        transparency: 'true', 
+        opacity: 0.5,
     }).addTo(map);
   }
 
   function initMap(options, chapters) {
     createDocumentSettings(options);
 
-    var chapterContainerMargin = 70;
+    var chapterContainerMargin = 60;
 
     document.title = getSetting('_mapTitle');
     $('#header').append('<h1>' + (getSetting('_mapTitle') || '') + '</h1>');
@@ -101,10 +103,10 @@ $(window).on('load', function() {
     // Add logo
     if (getSetting('_mapLogo')) {
       $('#logo').append('<img src="' + getSetting('_mapLogo') + '" />');
-      $('#top').css('height', '60px');
+      /*$('#top').css('height', '60px');*/
     } else {
       $('#logo').css('display', 'none');
-      $('#header').css('padding-top', '25px');
+      /*$('#header').css('padding-top', '25px');*/
     }
 
     // Load tiles
@@ -269,8 +271,10 @@ $(window).on('load', function() {
       });
     }
 
+    var headerHeight = $('div#header').height();
+    
     // For each block (chapter), calculate how many pixels above it
-    pixelsAbove[0] = -100;
+    pixelsAbove[0] = -100 + headerHeight; // this controls how far down you have to scroll to trigger the next chapter
     for (i = 1; i < chapters.length; i++) {
       pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i-1)).height() + chapterContainerMargin;
     }
@@ -279,10 +283,12 @@ $(window).on('load', function() {
     $('div#contents').scroll(function() {
       var currentPosition = $(this).scrollTop();
 
-      // Make title disappear on scroll
+      // Make title disappear on scroll (disabled)
+      /*
       if (currentPosition < 200) {
         $('#title').css('opacity', 1 - Math.min(1, currentPosition / 100));
       }
+      */
 
       for (var i = 0; i < pixelsAbove.length - 1; i++) {
 
@@ -313,6 +319,16 @@ $(window).on('load', function() {
           }
 
           var c = chapters[i];
+
+          // Fly to the new marker destination if latitude and longitude exist
+          // (moved this above the change in overlay for performance)
+          if (c['Latitude'] && c['Longitude']) {
+            var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
+            map.flyTo([c['Latitude'], c['Longitude']], zoom, {
+              animate: true,
+              duration: 2, // default is 2 seconds
+            });
+          }
 
           // Add chapter's overlay tiles if specified in options
           if (c['Overlay']) {
@@ -367,15 +383,6 @@ $(window).on('load', function() {
                   }
                 }
               }).addTo(map);
-            });
-          }
-
-          // Fly to the new marker destination if latitude and longitude exist
-          if (c['Latitude'] && c['Longitude']) {
-            var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
-            map.flyTo([c['Latitude'], c['Longitude']], zoom, {
-              animate: true,
-              duration: 2, // default is 2 seconds
             });
           }
 
