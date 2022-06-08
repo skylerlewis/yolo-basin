@@ -164,6 +164,8 @@ $(window).on('load', function() {
 
     for (i in chapters) {
       var c = chapters[i];
+      var cPrev = chapters[i-1];
+      var cNext = chapters[i+1];
 
       if ( !isNaN(parseFloat(c['Latitude'])) && !isNaN(parseFloat(c['Longitude']))) {
         var lat = parseFloat(c['Latitude']);
@@ -303,7 +305,7 @@ $(window).on('load', function() {
       }
       
       if (c['Chapter']) {
-        container.append('<h2 class="chapter-header">' + c['Chapter'] + '</h2>')
+        container.append('<h2 class="chapter-header" id = "' + c['Chapter Slug'] + '">' + c['Chapter'] + '</h2>')
       };
       container
         .append(media ? mediaContainer : '')
@@ -362,18 +364,13 @@ $(window).on('load', function() {
           currentlyInFocus = i;
           markActiveColor(currentlyInFocus);
 
-          // Remove raster tile overlay layer if needed
-          if (map.hasLayer(overlay)) {
-            map.removeLayer(overlay);
-          }
-
-          // Remove vector GeoJson overlay layer(s) if needed
+          // Remove GeoJson overlay layer(s) existing
           if (map.hasLayer(geoJsonOverlay)) {
             map.removeLayer(geoJsonOverlay);
           }
           if (map.hasLayer(geoJsonOverlay2)) {
             map.removeLayer(geoJsonOverlay2);
-          }
+          }        
 
           var c = chapters[i];
 
@@ -390,29 +387,25 @@ $(window).on('load', function() {
           // Add chapter's overlay tiles if specified in options
           if (c['Overlay']) {
 
-            var opacity = parseFloat(c['Overlay Transparency']) || 1;
-            var url = c['Overlay'];
+            if (map.hasLayer(overlay)) {
+              
+              // redraw the overlay, unless the same tile layer is already being displayed
+              currentTileUrl = overlay.getUrl();
+              if (c['Overlay'] != currentTileUrl) {
+                overlay.setUrl(c['Overlay']);
+                overlay.redraw();
+              }
 
-            if (url.split('.').pop() === 'geojson') {
-              $.getJSON(url, function(geojson) {
-                overlay = L.geoJson(geojson, {
-                  style: function(feature) {
-                    return {
-                      fillColor: feature.properties.fillColor || '#ffffff',
-                      weight: feature.properties.weight || 1,
-                      opacity: feature.properties.opacity || opacity,
-                      color: feature.properties.color || '#ff0000',
-                      fillOpacity: feature.properties.fillOpacity || 0.5,
-                    }
-                  }
-                }).addTo(map);
-              });
             } else {
-              overlay = L.tileLayer(c['Overlay'], { opacity: opacity }).addTo(map);
+              // create a new overlay layer if one doesn't already exist
+              overlay = L.tileLayer(c['Overlay']).addTo(map);
             }
 
+          } else {
+            // remove the overlay layer if it's not needed
+            map.removeLayer(overlay);
           }
-
+          
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {
 
@@ -472,6 +465,14 @@ $(window).on('load', function() {
               }).addTo(map);
             });
           }
+          
+          // show the correct legend overlay if provided
+          if (c['Overlay Legend']) {
+            $('#legend').show();
+            $('#legend-image').attr('src', c['Overlay Legend']);
+          } else {
+            $('#legend').hide();
+          }
 
           // and close the lightbox if it's open
           closeLightbox();
@@ -523,7 +524,7 @@ $(window).on('load', function() {
 
     // On first load, check hash and if it contains an number, scroll down
     if (parseInt(location.hash.substr(1))) {
-      var containerId = parseInt( location.hash.substr(1) ) - 2;
+      var containerId = parseInt( location.hash.substr(1) ) - 1;
       $('#contents').animate({
         scrollTop: $('#container' + containerId).offset().top
       }, 2000);

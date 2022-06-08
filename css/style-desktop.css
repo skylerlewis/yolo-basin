@@ -25,4 +25,36 @@
     visibility: visible;
   }
 
+  #legend {
+    left: 520px;
+    top: 20px;
+    visibility: visible;
+  }
+
+  #legend-image {
+    max-width:200px;
+  }
+
+}
+
+/* Tweaks to the lightbox for screen media */
+@media screen and (min-width: 768px) {
+  .lightboxOverlay {
+    width: calc(100% - 500px) !important;
+    left: 500px !important;
+  }
+  .lightbox {
+    width: calc(100% - 500px - 40px) !important;
+    left: 520px !important;
+  }
+  .lb-outerContainer {
+    width: 100% !important;
+    background: none !important;
+  }
+  .lb-image {
+    max-width: 100% !important;
+    height: inherit !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

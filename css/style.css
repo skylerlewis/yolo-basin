@@ -211,24 +211,12 @@ a, a:visited, a:hover {
   border: 5px black solid;
 }
 
-/* Tweaks to the lightbox for screen media */
-@media screen and (min-width: 768px) {
-  .lightboxOverlay {
-    width: calc(100% - 500px) !important;
-    left: 500px !important;
-  }
-  .lightbox {
-    width: calc(100% - 500px - 40px) !important;
-    left: 520px !important;
-  }
-  .lb-outerContainer {
-    width: 100% !important;
-    background: none !important;
-  }
-  .lb-image {
-    max-width: 100% !important;
-    height: inherit !important;
-    margin-left: auto;
-    margin-right: auto;
-  }
+#legend {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background-color: white;
+  padding: 10px;
+  display: none;
+  visibility: hidden;
 }
