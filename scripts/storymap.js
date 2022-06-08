@@ -91,6 +91,24 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
+  /** Loads label tiles and adds them to the map */
+  function addLabelOverlay() {
+    // var Stamen_TerrainLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
+    //   subdomains: 'abcd',
+    //   minZoom: 0,
+    //   maxZoom: 18,
+    //   ext: 'png'
+    // }).addTo(map);
+    var Stamen_TerrainLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 18,
+      ext: 'png',
+      opacity: 0.5,
+      }).addTo(map);
+  }
+
   function initMap(options, chapters) {
     createDocumentSettings(options);
 
@@ -111,6 +129,7 @@ $(window).on('load', function() {
 
     // Load tiles
     addBaseMap();
+    addLabelOverlay();
 
     // Add zoom controls if needed
     if (getSetting('_zoomControls') !== 'off') {
@@ -141,6 +160,7 @@ $(window).on('load', function() {
     var currentlyInFocus; // integer to specify each chapter is currently in focus
     var overlay;  // URL of the overlay for in-focus chapter
     var geoJsonOverlay;
+    var geoJsonOverlay2;
 
     for (i in chapters) {
       var c = chapters[i];
@@ -342,14 +362,17 @@ $(window).on('load', function() {
           currentlyInFocus = i;
           markActiveColor(currentlyInFocus);
 
-          // Remove overlay tile layer if needed
+          // Remove raster tile overlay layer if needed
           if (map.hasLayer(overlay)) {
             map.removeLayer(overlay);
           }
 
-          // Remove GeoJson Overlay tile layer if needed
+          // Remove vector GeoJson overlay layer(s) if needed
           if (map.hasLayer(geoJsonOverlay)) {
             map.removeLayer(geoJsonOverlay);
+          }
+          if (map.hasLayer(geoJsonOverlay2)) {
+            map.removeLayer(geoJsonOverlay2);
           }
 
           var c = chapters[i];
@@ -378,7 +401,7 @@ $(window).on('load', function() {
                       fillColor: feature.properties.fillColor || '#ffffff',
                       weight: feature.properties.weight || 1,
                       opacity: feature.properties.opacity || opacity,
-                      color: feature.properties.color || '#cccccc',
+                      color: feature.properties.color || '#ff0000',
                       fillOpacity: feature.properties.fillOpacity || 0.5,
                     }
                   }
@@ -412,7 +435,37 @@ $(window).on('load', function() {
                     fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
                     weight: feature.properties.weight || props.weight || 1,
                     opacity: feature.properties.opacity || props.opacity || 0.5,
-                    color: feature.properties.color || props.color || '#cccccc',
+                    color: feature.properties.color || props.color || '#ff0000',
+                    fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
+                  }
+                }
+              }).addTo(map);
+            });
+          }
+
+          if (c['GeoJSON Overlay 2']) {
+            $.getJSON(c['GeoJSON Overlay 2'], function(geojson) {
+
+              // Parse properties string into a JS object
+              var props = {};
+
+              if (c['GeoJSON Feature Properties 2']) {
+                var propsArray = c['GeoJSON Feature Properties 2'].split(';');
+                var props = {};
+                for (var p in propsArray) {
+                  if (propsArray[p].split(':').length === 2) {
+                    props[ propsArray[p].split(':')[0].trim() ] = propsArray[p].split(':')[1].trim();
+                  }
+                }
+              }
+
+              geoJsonOverlay2 = L.geoJson(geojson, {
+                style: function(feature) {
+                  return {
+                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
+                    weight: feature.properties.weight || props.weight || 1,
+                    opacity: feature.properties.opacity || props.opacity || 0.5,
+                    color: feature.properties.color || props.color || '#ff0000',
                     fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
                   }
                 }
