@@ -85,7 +85,7 @@ $(window).on('load', function() {
   function addBaseMap() {
     var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
     L.tileLayer.provider(basemap, {
-        maxZoom: 16, 
+        maxZoom: 18, 
         transparency: 'true', 
         opacity: 0.5,
     }).addTo(map);
@@ -380,31 +380,11 @@ $(window).on('load', function() {
             var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
               animate: true,
-              duration: 2, // default is 2 seconds
+              duration: 1, // default is 2 seconds
             });
           }
 
-          // Add chapter's overlay tiles if specified in options
-          if (c['Overlay']) {
 
-            if (map.hasLayer(overlay)) {
-              
-              // redraw the overlay, unless the same tile layer is already being displayed
-              currentTileUrl = overlay.getUrl();
-              if (c['Overlay'] != currentTileUrl) {
-                overlay.setUrl(c['Overlay']);
-                overlay.redraw();
-              }
-
-            } else {
-              // create a new overlay layer if one doesn't already exist
-              overlay = L.tileLayer(c['Overlay']).addTo(map);
-            }
-
-          } else {
-            // remove the overlay layer if it's not needed
-            map.removeLayer(overlay);
-          }
           
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {
@@ -466,6 +446,32 @@ $(window).on('load', function() {
             });
           }
           
+          // Add chapter's overlay tiles if specified in options
+          if (c['Overlay']) {
+
+            if (map.hasLayer(overlay)) {
+              
+              currentTileUrl = overlay.getUrl();
+              
+              if (c['Overlay'] != currentTileUrl) {
+                // remove the existing overlay layer
+                map.removeLayer(overlay);
+                // make a new overlay layer
+                overlay = L.tileLayer(c['Overlay']).addTo(map);
+              }
+
+            } else {
+              // create a new overlay layer if one doesn't already exist
+              overlay = L.tileLayer(c['Overlay']).addTo(map);
+            }
+
+          } else {
+            // remove the overlay layer if it's not needed
+            if (map.hasLayer(overlay)) {
+              map.removeLayer(overlay);
+            }
+          }
+
           // show the correct legend overlay if provided
           if (c['Overlay Legend']) {
             $('#legend').show();
