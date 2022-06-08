@@ -420,6 +420,9 @@ $(window).on('load', function() {
             });
           }
 
+          // and close the lightbox if it's open
+          closeLightbox();
+
           // No need to iterate through the following chapters
           break;
         }
@@ -500,4 +503,11 @@ $(window).on('load', function() {
     $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
   }
 
+  // closes the lightbox
+  function closeLightbox() {
+    document.getElementById('lightboxOverlay').style.display = "none";
+    document.getElementById('lightbox').style.display = "none";
+  };
+
 });
+
