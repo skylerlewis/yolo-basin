@@ -131,12 +131,18 @@ $(window).on('load', function() {
     addBaseMap();
     addLabelOverlay();
 
-    // Add zoom controls if needed
-    if (getSetting('_zoomControls') !== 'off') {
-      L.control.zoom({
-        position: getSetting('_zoomControls')
-      }).addTo(map);
-    }
+    // Add scale
+    L.control.scale({
+      position: 'topright',
+      maxWidth: 200,
+      imperial: true,
+      metric: false,
+    }).addTo(map);
+
+    // Add zoom controls
+    L.control.zoom({
+      position: 'topright',
+    }).addTo(map);
 
     var markers = [];
 
@@ -354,7 +360,7 @@ $(window).on('load', function() {
         ) {
 
           // Update URL hash
-          location.hash = i + 1;
+          location.hash = i;
 
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
@@ -373,7 +379,7 @@ $(window).on('load', function() {
           }        
 
           var c = chapters[i];
-
+          
           // Fly to the new marker destination if latitude and longitude exist
           // (moved this above the change in overlay for performance)
           if (c['Latitude'] && c['Longitude']) {
@@ -383,8 +389,14 @@ $(window).on('load', function() {
               duration: 1, // default is 2 seconds
             });
           }
-
-
+          
+          $('#non-map-content').hide();
+          // show the correct non-map content if provided
+          if (c['Non-Map Content']) {
+            $('#non-map-content-inner').remove();
+            $('#non-map-content').append('<div id="non-map-content-inner">' + c['Non-Map Content'] + '</div>');
+            $('#non-map-content').show();
+          }
           
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {
@@ -405,22 +417,40 @@ $(window).on('load', function() {
               geoJsonOverlay = L.geoJson(geojson, {
                 style: function(feature) {
                   return {
-                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
+                    stroke: feature.properties.stroke || props.stroke || true,
+                    color: feature.properties.color || props.color || '#ff0000',
                     weight: feature.properties.weight || props.weight || 1,
                     opacity: feature.properties.opacity || props.opacity || 0.5,
-                    color: feature.properties.color || props.color || '#ff0000',
+                    lineCap: feature.properties.lineCap || props.lineCap || 'round',
+                    lineJoin: feature.properties.lineJoin || props.lineJoin || 'round',
+                    dashArray: feature.properties.dashArray || props.dashArray || '',
+                    dashOffset: feature.properties.dashOffset || props.dashOffset || '',
+                    fill: feature.properties.fill || props.fill || false,
+                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
                     fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
+                    fillRule: feature.properties.fillRule || props.fillRule || 'evenodd',
                   }
                 }
               }).addTo(map);
             });
           }
+          
+          /*
+          if (c['GeoJSON Overlay 2']) {
+            if ((c['GeoJSON Overlay 2'] != geoJsonUrl2) | (c['GeoJSON Feature Properties 2'] != geoJsonStr2)) {
+              var geoJsonUrl2 = c['GeoJSON Overlay 2'];
+              var geoJsonStr2 = c['GeoJSON Feature Properties 2'];
+              var geoJsonContent = JSON.parse(geojsonUrl2);
+              var geoJsonStyle = JSON.parse('[' + geojsonStr2 + ']');
+              L.geoJSON(geoJsonContent, {
+                style: geoJsonStyle
+              }).addTo(map);
+            }
+          }
+          */
 
           if (c['GeoJSON Overlay 2']) {
             $.getJSON(c['GeoJSON Overlay 2'], function(geojson) {
-
-              // Parse properties string into a JS object
-              var props = {};
 
               if (c['GeoJSON Feature Properties 2']) {
                 var propsArray = c['GeoJSON Feature Properties 2'].split(';');
@@ -435,11 +465,18 @@ $(window).on('load', function() {
               geoJsonOverlay2 = L.geoJson(geojson, {
                 style: function(feature) {
                   return {
-                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
+                    stroke: feature.properties.stroke || props.stroke || true,
+                    color: feature.properties.color || props.color || '#ff0000',
                     weight: feature.properties.weight || props.weight || 1,
                     opacity: feature.properties.opacity || props.opacity || 0.5,
-                    color: feature.properties.color || props.color || '#ff0000',
+                    lineCap: feature.properties.lineCap || props.lineCap || 'round',
+                    lineJoin: feature.properties.lineJoin || props.lineJoin || 'round',
+                    dashArray: feature.properties.dashArray || props.dashArray || '',
+                    dashOffset: feature.properties.dashOffset || props.dashOffset || '',
+                    fill: feature.properties.fill || props.fill || false,
+                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
                     fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
+                    fillRule: feature.properties.fillRule || props.fillRule || 'evenodd',
                   }
                 }
               }).addTo(map);
@@ -474,8 +511,8 @@ $(window).on('load', function() {
 
           // show the correct legend overlay if provided
           if (c['Overlay Legend']) {
-            $('#legend').show();
             $('#legend-image').attr('src', c['Overlay Legend']);
+            $('#legend').show();
           } else {
             $('#legend').hide();
           }

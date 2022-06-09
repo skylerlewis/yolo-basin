@@ -211,6 +211,9 @@ a, a:visited, a:hover {
   border: 5px black solid;
 }
 
+/* legend overlay for desktop view */
+/* visibility:hidden is overridden on style-desktop.css */
+
 #legend {
   position: absolute;
   left: 20px;
@@ -219,4 +222,16 @@ a, a:visited, a:hover {
   padding: 10px;
   display: none;
   visibility: hidden;
+}
+
+/* this should match the dimensions/positioning of the map */
+#non-map-content {
+  height: 200px;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  display: none;
+  z-index:9999;
 }

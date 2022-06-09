@@ -5,6 +5,7 @@
     height: 100vh;
     max-width: 500px;
     top: 0;
+    /* border-right: 3px orange solid; */
   }
 
   #map {
@@ -24,6 +25,8 @@
   .leaflet-control-attribution {
     visibility: visible;
   }
+  
+  /* legend overlay */
 
   #legend {
     left: 520px;
@@ -35,10 +38,16 @@
     max-width:200px;
   }
 
-}
+  /* this should match the dimensions/positioning of the map */
+  #non-map-content {
+    width: calc(100vw - 500px);
+    left: 500px;
+    height: 100vh;
+    border: 0;
+    z-index: 0;
+  }
 
-/* Tweaks to the lightbox for screen media */
-@media screen and (min-width: 768px) {
+  /* Tweaks to the lightbox for screen media */
   .lightboxOverlay {
     width: calc(100% - 500px) !important;
     left: 500px !important;
