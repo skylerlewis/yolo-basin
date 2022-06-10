@@ -1,6 +1,6 @@
 # Yolo Basin Storymap
 <p align="center">
-  <img src="./ybf-logo.jpg" title="Yolo Basin Foundation Logo" />
+  <img src="./media/ybf-logo.jpg" title="Yolo Basin Foundation Logo" />
 </p>
 
 **Live link to beta version (under active development): https://skylerlewis.github.io/yolo-basin/**
