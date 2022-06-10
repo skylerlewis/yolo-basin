@@ -1,9 +1,8 @@
 # Yolo Basin Storymap
-<p align="center">
-  <img src="./media/ybf-logo.jpg" title="Yolo Basin Foundation Logo" height="150px" />
-</p>
 
 **Live link to beta version (under active development): https://skylerlewis.github.io/yolo-basin/**
+
+<img src="./media/ybf-logo.jpg" title="Yolo Basin Foundation Logo" height="100px" />
 
 ## Credits and licenses
 Software modified from a [template](https://github.com/HandsOnDataViz/leaflet-storymaps-with-google-sheets) from [HandsOnDataViz](https://github.com/HandsOnDataViz) developed by [Ilya Ilyankou](https://github.com/ilyankou) and [Jack Dougherty](https://github.com/jackdougherty) with support from Connecticut Humanities and Trinity College, CT. Inspired by Code for Atlanta mapsfor.us (2016) https://github.com/codeforatlanta/mapsforus (BSD-3-Clause). Adapted from MUX Lab, Map Effects 100: https://github.com/muxlab/map-effects-100, see http://muxlab.github.io/map-effects-100/Leaflet/11_scroll-driven-map-navigation.html. Components include:
