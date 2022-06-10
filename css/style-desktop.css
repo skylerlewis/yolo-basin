@@ -67,3 +67,8 @@
     margin-right: auto;
   }
 }
+
+.nav-bar-fixed {
+  position: absolute;
+  top: 60px;
+}

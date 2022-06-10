@@ -112,7 +112,7 @@ $(window).on('load', function() {
   function initMap(options, chapters) {
     createDocumentSettings(options);
 
-    var chapterContainerMargin = 60;
+    var chapterContainerMargin = 20; // this needs to match .chapter-container top+bottom margin in CSS
 
     document.title = getSetting('_mapTitle');
     $('#header').append('<h1>' + (getSetting('_mapTitle') || '') + '</h1>');
@@ -126,6 +126,12 @@ $(window).on('load', function() {
       $('#logo').css('display', 'none');
       /*$('#header').css('padding-top', '25px');*/
     }
+    // Click logo to go back to top
+    $('#logo').click(function() {
+      $('#contents').animate({
+        scrollTop: 0
+      }, getDuration(0, '#contents', 0.5))
+     });
 
     // Load tiles
     addBaseMap();
@@ -167,6 +173,8 @@ $(window).on('load', function() {
     var overlay;  // URL of the overlay for in-focus chapter
     var geoJsonOverlay;
     var geoJsonOverlay2;
+
+    var headingList = [];
 
     for (i in chapters) {
       var c = chapters[i];
@@ -311,7 +319,10 @@ $(window).on('load', function() {
       }
       
       if (c['Chapter']) {
-        container.append('<h2 class="chapter-header" id = "' + c['Chapter Slug'] + '">' + c['Chapter'] + '</h2>')
+        // container.append('<h2 class="chapter-header" id = "' + c['Chapter Slug'] + '">' + c['Chapter'] + '</h2>')
+        // headingList.push([c['Chapter'], c['Chapter Slug']]);
+        container.append('<h2 class="chapter-header">' + c['Chapter'] + '</h2>')
+        headingList.push({'index': i, 'name': c['Chapter']});
       };
       container
         .append(media ? mediaContainer : '')
@@ -332,13 +343,17 @@ $(window).on('load', function() {
         'max-height': imgContainerHeight + 'px',
       });
     }
-
-    var headerHeight = $('div#header').height();
     
     // For each block (chapter), calculate how many pixels above it
-    pixelsAbove[0] = -100 + headerHeight; // this controls how far down you have to scroll to trigger the next chapter
+    var titleHeight = $('div#title').outerHeight(true);
+    var headerHeight = $('div#header').outerHeight(true);
+    var navHeight = $('div#nav').outerHeight(true);
+    pixelsAbove[0] = headerHeight + navHeight - 100; // this controls how far down you have to scroll to trigger the next chapter
     for (i = 1; i < chapters.length; i++) {
-      pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i-1)).height() + chapterContainerMargin;
+      // pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i-1)).height() + chapterContainerMargin;
+      // pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i)).outerHeight(true);
+      pixelsAbove[i] = $('#container' + i).offset().top - titleHeight - navHeight - 200;  
+      // change at 100 pixels from top of scroll area
     }
     pixelsAbove.push(Number.MAX_VALUE);
 
@@ -351,7 +366,15 @@ $(window).on('load', function() {
         $('#title').css('opacity', 1 - Math.min(1, currentPosition / 100));
       }
       */
-
+      
+      // Make navbar fix to top on scroll
+      if (currentPosition >= titleHeight + headerHeight) {
+        $('#nav-bar').css('position', 'absolute').css('top',titleHeight);
+      }
+      if (currentPosition < titleHeight + headerHeight) {
+        $('#nav-bar').css('position', 'static');
+      }
+      
       for (var i = 0; i < pixelsAbove.length - 1; i++) {
 
         if ( currentPosition >= pixelsAbove[i]
@@ -360,7 +383,7 @@ $(window).on('load', function() {
         ) {
 
           // Update URL hash
-          location.hash = i;
+          location.hash = i + 1;
 
           // Remove styling for the old in-focus chapter and
           // add it to the new active chapter
@@ -550,7 +573,7 @@ $(window).on('load', function() {
         markers[i].addTo(map);
         markers[i]['_pixelsAbove'] = pixelsAbove[i];
         markers[i].on('click', function() {
-          var pixels = parseInt($(this)[0]['_pixelsAbove']) + 5;
+          var pixels = parseInt($(this)[0]['_pixelsAbove']) +20 ;
           $('div#contents').animate({
             scrollTop: pixels + 'px'});
         });
@@ -563,14 +586,59 @@ $(window).on('load', function() {
     $('div.loader').css('visibility', 'hidden');
 
     $('div#container0').addClass("in-focus");
-    $('div#contents').animate({scrollTop: '1px'});
+    // $('div#contents').animate({scrollTop: '1px'});
+
+    // Create navigation bar
+    var navBar = $('<ol>', {
+      id: 'nav-bar',
+    });
+    
+    // var topButton = $('<li>', {
+    //   class: 'nav-heading-item',
+    // })
+    //   .append('<a href="#1">Back to Top</a>')
+    //   .click(function() {
+    //     $('#contents').animate({
+    //       scrollTop: 0
+    //     }, getDuration(0, '#contents', 0.5))
+    // });
+
+    for (i in headingList) {
+      headingList[i]['button'] = $('<a>', {
+          href: '#' + headingList[i]['index'],
+        }).append(headingList[i]['name']);
+      headingList[i]['wrapper'] = $('<li>', {
+          class: 'nav-heading-item',
+        }).append(headingList[i]['button']);
+      navBar.append(headingList[i]['wrapper']);
+    }
+    $('div#nav').append(navBar);
+
+    var titleHeight = $('div#title').outerHeight(true);
+    var headerHeight = $('div#header').outerHeight(true);
+    var navHeight = $('div#nav').outerHeight(true);
+    
+    // Update links in navigation bar
+    for (i in headingList) {
+      headingList[i]['button'].data('position', $('#container' + headingList[i]['index']).offset().top);
+      headingList[i]['button'].click(function() {
+        var target = $(this).data('position') - titleHeight - navHeight - 120
+        $('#contents').animate({
+          scrollTop: target
+        }, getDuration(target, '#contents', 0.5))
+      });
+    }
 
     // On first load, check hash and if it contains an number, scroll down
-    if (parseInt(location.hash.substr(1))) {
-      var containerId = parseInt( location.hash.substr(1) ) - 1;
-      $('#contents').animate({
-        scrollTop: $('#container' + containerId).offset().top
-      }, 2000);
+    if (parseInt(location.hash.slice(1))) {
+      var containerId = parseInt(location.hash.slice(1)) - 1;
+      if (containerId > 0) {
+        var target = $('#container' + containerId).offset().top - titleHeight - navHeight - 120;
+        // scroll to 120 pixels from top of scroll area
+        $('#contents').animate({
+          scrollTop: target 
+        }, getDuration(target, '#contents', 0.5));
+    }
     }
 
     // Add Google Analytics if the ID exists
@@ -604,7 +672,18 @@ $(window).on('load', function() {
   function closeLightbox() {
     document.getElementById('lightboxOverlay').style.display = "none";
     document.getElementById('lightbox').style.display = "none";
-  };
+  }
+
+  // calculates a duration for scrolling
+  // rate e.g. 0.5 = 1000px/500ms
+  // context e.g. window or '#content'
+  function getDuration(target, context, rate) {
+    var currentTop = $(context).scrollTop(),
+    distance;
+    distance = Math.abs(currentTop - target);
+    return distance * rate;
+    // return rate * 1000
+  }
 
 });
 

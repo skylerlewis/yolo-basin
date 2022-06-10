@@ -65,7 +65,7 @@ body {
 .chapter-container {
   /* margin + padding = chapterContainerMargin in script.js */
   /* Important for scrolling! */
-  margin: 50px 0 0 0;
+  margin: 10px 0 10px 0;
   padding: 10px 0 10px 0;
   text-align: center;
 }
@@ -234,4 +234,25 @@ a, a:visited, a:hover {
   background-color: black;
   display: none;
   z-index:9999;
+}
+
+/* navigation bar */
+#nav-bar {
+  /* height: 50px; */
+  margin-top: 0px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  z-index: 9999;
+}
+.nav-heading-item {
+  display: inline-block;
+  padding: 2px 4px 2px 4px;
+  margin: 2px;
+  background-color: #00718f;
+}
+.nav-heading-item a {
+  text-decoration: none;
+  color: white;
+  font-size: smaller;
 }
