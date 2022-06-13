@@ -256,3 +256,8 @@ a, a:visited, a:hover {
   color: white;
   font-size: smaller;
 }
+/* .nav-bar-fixed {
+  position: absolute;
+  top: 60px;
+  white-space: nowrap;
+} */

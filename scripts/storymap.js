@@ -403,9 +403,19 @@ $(window).on('load', function() {
 
           var c = chapters[i];
           
+          var currentCenter = map.getCenter();
+          var currentLat = currentCenter ? roundFloat(currentCenter.lat, 5) : null;
+          var currentLon = currentCenter ? roundFloat(currentCenter.lng, 5) : null;
+          var currentZoom = Math.round(map.getZoom());
+          var newLat = parseFloat(c['Latitude']) ? roundFloat(parseFloat(c['Latitude']), 5) : null;
+          var newLon = parseFloat(c['Longitude']) ? roundFloat(parseFloat(c['Longitude']), 5) : null;
+          var newZoom = parseInt(c['Zoom']);
+          
           // Fly to the new marker destination if latitude and longitude exist
+          // and if latitude/longitude/zoom have changed
           // (moved this above the change in overlay for performance)
-          if (c['Latitude'] && c['Longitude']) {
+          if ((c['Latitude'] && c['Longitude']) 
+          & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))) {
             var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
               animate: true,
@@ -511,7 +521,8 @@ $(window).on('load', function() {
 
             if (map.hasLayer(overlay)) {
               
-              currentTileUrl = overlay.getUrl();
+              // currentTileUrl = overlay.getUrl(); // need to figure out how to get tile URL
+              currentTileUrl = null;
               
               if (c['Overlay'] != currentTileUrl) {
                 // remove the existing overlay layer
@@ -579,7 +590,7 @@ $(window).on('load', function() {
         });
         bounds.push(markers[i].getLatLng());
       }
-    }
+    }  
     map.fitBounds(bounds);
 
     $('#map, #narration, #title').css('visibility', 'visible');
@@ -684,6 +695,13 @@ $(window).on('load', function() {
     return distance * rate;
     // return rate * 1000
   }
+
+   // Method for precise rounding of floats
+  roundFloat = function(num, places) {
+   var p = Math.pow(10, places);
+   var n = (num * p) * (1 + Number.EPSILON);
+   return Math.round(n) / p;
+ }
 
 });
 
