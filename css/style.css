@@ -261,3 +261,7 @@ a, a:visited, a:hover {
   top: 60px;
   white-space: nowrap;
 } */
+
+#layer-credit-wrapper {
+  display: inline;
+}

@@ -517,23 +517,23 @@ $(window).on('load', function() {
           }
           
           // Add chapter's overlay tiles if specified in options
-          if (c['Overlay']) {
+          if (c['Tile Overlay']) {
 
             if (map.hasLayer(overlay)) {
               
               // currentTileUrl = overlay.getUrl(); // need to figure out how to get tile URL
               currentTileUrl = null;
               
-              if (c['Overlay'] != currentTileUrl) {
+              if (c['Tile Overlay'] != currentTileUrl) {
                 // remove the existing overlay layer
                 map.removeLayer(overlay);
                 // make a new overlay layer
-                overlay = L.tileLayer(c['Overlay']).addTo(map);
+                overlay = L.tileLayer(c['Tile Overlay']).addTo(map);
               }
 
             } else {
               // create a new overlay layer if one doesn't already exist
-              overlay = L.tileLayer(c['Overlay']).addTo(map);
+              overlay = L.tileLayer(c['Tile Overlay']).addTo(map);
             }
 
           } else {
@@ -550,6 +550,10 @@ $(window).on('load', function() {
           } else {
             $('#legend').hide();
           }
+
+          // Update layer credits
+          var creditHtml =  c['Map Credit'] ? '<strong>' + c['Map Credit'] + '</strong> | ' : '';
+          $('#layer-credit-wrapper').html(creditHtml);
 
           // and close the lightbox if it's open
           closeLightbox();
@@ -675,8 +679,11 @@ $(window).on('load', function() {
   function changeAttribution() {
     var attributionHTML = $('.leaflet-control-attribution')[0].innerHTML;
     var credit = trySetting('_attributionText', '');
-    credit += ' with ';
-    $('.leaflet-control-attribution')[0].innerHTML = credit + attributionHTML;
+    var layerCreditWrapper = $('<div>', {
+      id: 'layer-credit-wrapper',
+    });
+    $('.leaflet-control-attribution')[0].innerHTML = credit + ' | ' + attributionHTML;
+    $('.leaflet-control-attribution').prepend(layerCreditWrapper);
   }
 
   // closes the lightbox
