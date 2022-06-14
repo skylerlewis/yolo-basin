@@ -421,6 +421,7 @@ $(window).on('load', function() {
               animate: true,
               duration: 1, // default is 2 seconds
             });
+            map.setZoom(zoom);
           }
           
           $('#non-map-content').hide();
