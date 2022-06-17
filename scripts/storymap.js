@@ -99,14 +99,14 @@ $(window).on('load', function() {
     //   maxZoom: 18,
     //   ext: 'png'
     // }).addTo(map);
-    var Stamen_TerrainLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
-      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      subdomains: 'abcd',
-      minZoom: 0,
-      maxZoom: 18,
-      ext: 'png',
-      opacity: 0.5,
-      }).addTo(map);
+    // var Stamen_TerrainLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
+    //   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    //   subdomains: 'abcd',
+    //   minZoom: 0,
+    //   maxZoom: 18,
+    //   ext: 'png',
+    //   opacity: 0.5,
+    //   }).addTo(map);
   }
 
   function initMap(options, chapters) {
@@ -412,12 +412,12 @@ $(window).on('load', function() {
           markActiveColor(currentlyInFocus);
 
           // Remove GeoJson overlay layer(s) existing
-          if (map.hasLayer(geoJsonOverlay)) {
-            map.removeLayer(geoJsonOverlay);
-          }
-          if (map.hasLayer(geoJsonOverlay2)) {
-            map.removeLayer(geoJsonOverlay2);
-          }        
+          // if (map.hasLayer(geoJsonOverlay)) {
+          //   map.removeLayer(geoJsonOverlay);
+          // }
+          // if (map.hasLayer(geoJsonOverlay2)) {
+          //   map.removeLayer(geoJsonOverlay2);
+          // }        
 
           var c = chapters[i];
           
@@ -433,7 +433,8 @@ $(window).on('load', function() {
           // and if latitude/longitude/zoom have changed
           // (moved this above the change in overlay for performance)
           if ((c['Latitude'] && c['Longitude'])
-             & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))
+          //   & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))
+          // temporarily disabled this check as it was preventing zooming in some cases
           ) { 
             var zoom = c['Zoom'] ? parseInt(c['Zoom']) : z;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
@@ -451,6 +452,14 @@ $(window).on('load', function() {
             $('#non-map-content').show();
           }
           
+          // Remove GeoJson overlay layer(s) existing
+          if (map.hasLayer(geoJsonOverlay)) {
+            map.removeLayer(geoJsonOverlay);
+          }
+          if (map.hasLayer(geoJsonOverlay2)) {
+            map.removeLayer(geoJsonOverlay2);
+          }     
+
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {
 
