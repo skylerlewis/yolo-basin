@@ -292,6 +292,7 @@ $(window).on('load', function() {
         'mp3': 'audio',
         'ogg': 'audio',
         'wav': 'audio',
+        'mp4': 'video',
       }
 
       var mediaExt = c['Media Link'] ? c['Media Link'].split('.').pop().toLowerCase() : '';
@@ -300,7 +301,9 @@ $(window).on('load', function() {
       if (mediaType) {
         media = $('<' + mediaType + '>', {
           src: c['Media Link'],
-          controls: mediaType === 'audio' ? 'controls' : '',
+          controls: mediaType != 'img' ? 'controls' : '',
+          autoplay: mediaType === 'video' ? 'autoplay' : '',
+          muted: mediaType === 'video' ? 'muted' : '',
           alt: c['Chapter']
         });
 
