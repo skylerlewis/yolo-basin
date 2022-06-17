@@ -230,8 +230,10 @@ $(window).on('load', function() {
         });
       }
 
-      // YouTube
-      if (c['Media Link'] && c['Media Link'].indexOf('youtube.com/') > -1) {
+      // YouTube or Google Drive video embed
+      if (c['Media Link'] 
+      && (c['Media Link'].indexOf('youtube.com/') > -1 | c['Media Link'].indexOf('drive.google.com/file/') > -1)
+      ) {
         media = $('<iframe></iframe>', {
           src: c['Media Link'],
           width: '100%',
