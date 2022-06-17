@@ -433,7 +433,7 @@ $(window).on('load', function() {
           // and if latitude/longitude/zoom have changed
           // (moved this above the change in overlay for performance)
           if ((c['Latitude'] && c['Longitude'])
-          // & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))
+             & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))
           ) { 
             var zoom = c['Zoom'] ? parseInt(c['Zoom']) : z;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
