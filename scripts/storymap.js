@@ -421,7 +421,14 @@ $(window).on('load', function() {
               animate: true,
               duration: 1, // default is 2 seconds
             });
-            map.setZoom(zoom);
+            // map.setCenter([c['Latitude'], c['Longitude']], {
+            //   animate: true,
+            //   duration: 1, // default is 2 seconds
+            // });
+            // map.setZoom(zoom, {
+            //   animate: true,
+            //   duration: 1, // default is 2 seconds
+            // });
           }
           
           $('#non-map-content').hide();
