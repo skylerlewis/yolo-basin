@@ -150,6 +150,19 @@ $(window).on('load', function() {
       position: 'topright',
     }).addTo(map);
 
+    // Initiate the zoom variable
+    // var z = parseInt(map.getZoom());
+
+    // Set up behavior of zoom buttons
+    // $('#button-zoom-in').click(function(){
+    //   z = parseInt(z) + 1;
+    //   map.setZoom(z);
+    // });
+    // $('#button-zoom-out').click(function(){
+    //   z = parseInt(z) - 1;
+    //   map.setZoom(z);
+    // });
+
     var markers = [];
 
     var markActiveColor = function(k) {
@@ -419,21 +432,15 @@ $(window).on('load', function() {
           // Fly to the new marker destination if latitude and longitude exist
           // and if latitude/longitude/zoom have changed
           // (moved this above the change in overlay for performance)
-          if ((c['Latitude'] && c['Longitude']) 
-          & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))) {
-            var zoom = c['Zoom'] ? c['Zoom'] : CHAPTER_ZOOM;
+          if ((c['Latitude'] && c['Longitude'])
+          // & ((newLat != currentLat) | (newLon != currentLon) | (newZoom != currentZoom))
+          ) { 
+            var zoom = c['Zoom'] ? parseInt(c['Zoom']) : z;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
               animate: true,
               duration: 1, // default is 2 seconds
             });
-            // map.setCenter([c['Latitude'], c['Longitude']], {
-            //   animate: true,
-            //   duration: 1, // default is 2 seconds
-            // });
-            // map.setZoom(zoom, {
-            //   animate: true,
-            //   duration: 1, // default is 2 seconds
-            // });
+            // z = zoom;
           }
           
           $('#non-map-content').hide();
@@ -684,7 +691,6 @@ $(window).on('load', function() {
 
 
   }
-
 
   /**
    * Changes map attribution text in bottom-right
