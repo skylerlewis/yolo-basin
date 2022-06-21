@@ -256,6 +256,9 @@ a, a:visited, a:hover {
   color: white;
   font-size: smaller;
 }
+/* .nav-heading-item-selected {
+  background-color: goldenrod;
+}*/
 /* .nav-bar-fixed {
   position: absolute;
   top: 60px;
@@ -264,4 +267,15 @@ a, a:visited, a:hover {
 
 #layer-credit-wrapper {
   display: inline;
+}
+
+.marker-section-active {
+  display: inherit;
+}
+.marker-section-inactive {
+  display: none;
+}
+
+.leaflet-shadow-pane {
+  display: none;
 }

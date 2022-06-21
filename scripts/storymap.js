@@ -166,15 +166,17 @@ $(window).on('load', function() {
     var markers = [];
 
     var markActiveColor = function(k) {
-      /* Removes marker-active class from all markers */
       for (var i = 0; i < markers.length; i++) {
         if (markers[i] && markers[i]._icon) {
+
+          /* Removes marker-active class from all markers */
           markers[i]._icon.className = markers[i]._icon.className.replace(' marker-active', '');
 
+          /* Adds marker-active class, which is orange, to marker k */
           if (i == k) {
-            /* Adds marker-active class, which is orange, to marker k */
             markers[k]._icon.className += ' marker-active';
           }
+
         }
       }
     }
@@ -188,6 +190,15 @@ $(window).on('load', function() {
     var geoJsonOverlay2;
 
     var headingList = [];
+
+    // propagate chapters: if each chapter doesn't have a heading, use the last non-null heading
+    for (i in chapters) {
+      var headingIndex = parseInt(i);
+      while ((!chapters[i]['Section']) & (headingIndex >= 0)) {
+        chapters[i]['Section'] = chapters[headingIndex]['Chapter'];
+        headingIndex += -1;
+      }
+    }
 
     for (i in chapters) {
       var c = chapters[i];
@@ -375,6 +386,8 @@ $(window).on('load', function() {
     }
     pixelsAbove.push(Number.MAX_VALUE);
 
+    var currentSection = '';
+
     $('div#contents').scroll(function() {
       var currentPosition = $(this).scrollTop();
 
@@ -420,7 +433,22 @@ $(window).on('load', function() {
           // }        
 
           var c = chapters[i];
-          
+
+          // if the section heading has changed
+          if (c['Section'] != currentSection) {
+            currentSection = c['Section'];
+            document.title = getSetting('_mapTitle') + ': ' + c['Section'];
+            /* show only the marker pins in this section */
+            for (var i = 0; i < markers.length; i++) {
+              if (markers[i] && markers[i]._icon) {
+                markers[i]._icon.className = markers[i]._icon.className.replace('marker-section-active', 'marker-section-inactive');
+                if (markers[i]['Section'] == c['Section']) {
+                  markers[i]._icon.className = markers[i]._icon.className.replace('marker-section-inactive', 'marker-section-active');
+                }
+              }
+            }      
+          } 
+
           var currentCenter = map.getCenter();
           var currentLat = currentCenter ? roundFloat(currentCenter.lat, 5) : null;
           var currentLon = currentCenter ? roundFloat(currentCenter.lng, 5) : null;
@@ -443,7 +471,7 @@ $(window).on('load', function() {
             });
             // z = zoom;
           }
-          
+
           $('#non-map-content').hide();
           // show the correct non-map content if provided
           if (c['Non-Map Content']) {
@@ -622,6 +650,9 @@ $(window).on('load', function() {
             scrollTop: pixels + 'px'});
         });
         bounds.push(markers[i].getLatLng());
+
+        markers[i]['Section'] = chapters[i]['Section'];
+        markers[i]._icon.className = markers[i]._icon.className += ' marker-section-inactive';
       }
     }  
     map.fitBounds(bounds);
@@ -647,6 +678,7 @@ $(window).on('load', function() {
     //     }, getDuration(0, '#contents', 0.5))
     // });
 
+    // Create heading navigation bar
     for (i in headingList) {
       headingList[i]['button'] = $('<a>', {
           href: '#' + headingList[i]['index'],
@@ -727,8 +759,8 @@ $(window).on('load', function() {
     var currentTop = $(context).scrollTop(),
     distance;
     distance = Math.abs(currentTop - target);
-    return distance * rate;
-    // return rate * 1000
+    // return distance * rate;
+    return rate * 1000
   }
 
    // Method for precise rounding of floats
