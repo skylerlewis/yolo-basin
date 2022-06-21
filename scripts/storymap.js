@@ -83,12 +83,26 @@ $(window).on('load', function() {
    * Loads the basemap and adds it to the map
    */
   function addBaseMap() {
-    var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
-    L.tileLayer.provider(basemap, {
-        maxZoom: 18, 
-        transparency: 'true', 
-        opacity: 0.5,
+    //var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
+    //L.tileLayer.provider(basemap, {
+    //    maxZoom: 18, 
+    //    transparency: 'true', 
+    //    opacity: 0.5,
+    //}).addTo(map);
+
+    L.tileLayer.provider('Esri.WorldImagery', {
+      minZoom: 0,
+      maxZoom: 11, 
+      transparency: 'true', 
+      opacity: 0.5,
     }).addTo(map);
+    L.tileLayer.provider('USGSTNM.USImagery', {
+      minZoom: 12,
+      maxZoom: 20, 
+      transparency: 'true', 
+      opacity: 0.6,
+    }).addTo(map);
+
   }
 
   /** Loads label tiles and adds them to the map */
@@ -114,6 +128,8 @@ $(window).on('load', function() {
 
     var chapterContainerMargin = 20; // this needs to match .chapter-container top+bottom margin in CSS
 
+    var paused = false;
+
     document.title = getSetting('_mapTitle');
     $('#header').append('<h1>' + (getSetting('_mapTitle') || '') + '</h1>');
     $('#header').append('<p class="map-subtitle">' + (getSetting('_mapSubtitle') || '') + '</p>');
@@ -130,7 +146,7 @@ $(window).on('load', function() {
     $('#logo').click(function() {
       $('#contents').animate({
         scrollTop: 0
-      }, getDuration(0, '#contents', 0.5))
+      }, 0) // getDuration(0, '#contents', 0.5))
      });
 
     // Load tiles
@@ -196,6 +212,7 @@ $(window).on('load', function() {
       var headingIndex = parseInt(i);
       while ((!chapters[i]['Section']) & (headingIndex >= 0)) {
         chapters[i]['Section'] = chapters[headingIndex]['Chapter'];
+        chapters[i]['SectionIndex'] = headingIndex;
         headingIndex += -1;
       }
     }
@@ -388,8 +405,11 @@ $(window).on('load', function() {
 
     var currentSection = '';
 
-    $('div#contents').scroll(function() {
-      var currentPosition = $(this).scrollTop();
+    // Execute whenever the map scrolls, or on initial load
+    $('div#contents').scroll(updateMap);
+    function updateMap(initial = false) {
+      //var currentPosition = $(this).scrollTop();
+      var currentPosition = $('div#contents').scrollTop();
 
       // Make title disappear on scroll (disabled)
       /*
@@ -408,9 +428,9 @@ $(window).on('load', function() {
       
       for (var i = 0; i < pixelsAbove.length - 1; i++) {
 
-        if ( currentPosition >= pixelsAbove[i]
+        if ( (currentPosition >= pixelsAbove[i]
           && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
-          && currentlyInFocus != i
+          && currentlyInFocus != i) | initial
         ) {
 
           // Update URL hash
@@ -438,6 +458,9 @@ $(window).on('load', function() {
           if (c['Section'] != currentSection) {
             currentSection = c['Section'];
             document.title = getSetting('_mapTitle') + ': ' + c['Section'];
+            /* style the nav buttons */
+            $('[id^=nav-heading-item-]:not(#nav-heading-item-'+ c['SectionIndex'] + ')').removeClass('nav-heading-item-selected');
+            $('#nav-heading-item-'+ c['SectionIndex']).addClass('nav-heading-item-selected');
             /* show only the marker pins in this section */
             for (var i = 0; i < markers.length; i++) {
               if (markers[i] && markers[i]._icon) {
@@ -467,7 +490,7 @@ $(window).on('load', function() {
             var zoom = c['Zoom'] ? parseInt(c['Zoom']) : z;
             map.flyTo([c['Latitude'], c['Longitude']], zoom, {
               animate: true,
-              duration: 1, // default is 2 seconds
+              duration: 0.75, // default is 2 seconds
             });
             // z = zoom;
           }
@@ -523,22 +546,12 @@ $(window).on('load', function() {
                 }
               }).addTo(map);
             });
+
+            //if (!(c['Latitude'] && c['Longitude'])) {
+            //  map.fitBounds(geoJsonOverlay.getBounds());
+            //}
           }
           
-          /*
-          if (c['GeoJSON Overlay 2']) {
-            if ((c['GeoJSON Overlay 2'] != geoJsonUrl2) | (c['GeoJSON Feature Properties 2'] != geoJsonStr2)) {
-              var geoJsonUrl2 = c['GeoJSON Overlay 2'];
-              var geoJsonStr2 = c['GeoJSON Feature Properties 2'];
-              var geoJsonContent = JSON.parse(geojsonUrl2);
-              var geoJsonStyle = JSON.parse('[' + geojsonStr2 + ']');
-              L.geoJSON(geoJsonContent, {
-                style: geoJsonStyle
-              }).addTo(map);
-            }
-          }
-          */
-
           if (c['GeoJSON Overlay 2']) {
             $.getJSON(c['GeoJSON Overlay 2'], function(geojson) {
 
@@ -619,8 +632,7 @@ $(window).on('load', function() {
           break;
         }
       }
-    });
-
+    }
 
     $('#contents').append(" \
       <div id='space-at-the-bottom'> \
@@ -685,6 +697,7 @@ $(window).on('load', function() {
         }).append(headingList[i]['name']);
       headingList[i]['wrapper'] = $('<li>', {
           class: 'nav-heading-item',
+          id: 'nav-heading-item-' + + headingList[i]['index'],
         }).append(headingList[i]['button']);
       navBar.append(headingList[i]['wrapper']);
     }
@@ -701,21 +714,23 @@ $(window).on('load', function() {
         var target = $(this).data('position') - titleHeight - navHeight - 120
         $('#contents').animate({
           scrollTop: target
-        }, getDuration(target, '#contents', 0.5))
+        }, 0) // getDuration(target, '#contents', 0.5))
       });
     }
 
-    // On first load, check hash and if it contains an number, scroll down
-    if (parseInt(location.hash.slice(1))) {
+    // On first load, check hash and if it contains an number, scroll down, else update map from initial location
+    if (!parseInt(location.hash.slice(1))) {
+      updateMap(initial = true);
+    } else {
       var containerId = parseInt(location.hash.slice(1)) - 1;
       if (containerId > 0) {
         var target = $('#container' + containerId).offset().top - titleHeight - navHeight - 120;
         // scroll to 120 pixels from top of scroll area
         $('#contents').animate({
           scrollTop: target 
-        }, getDuration(target, '#contents', 0.5));
+        }, 0) // getDuration(target, '#contents', 0.5));
     }
-    }
+    } 
 
     // Add Google Analytics if the ID exists
     var ga = getSetting('_googleAnalytics');
@@ -729,7 +744,6 @@ $(window).on('load', function() {
       gtag('js', new Date());
       gtag('config', ga);
     }
-
 
   }
 
@@ -759,8 +773,8 @@ $(window).on('load', function() {
     var currentTop = $(context).scrollTop(),
     distance;
     distance = Math.abs(currentTop - target);
-    // return distance * rate;
-    return rate * 1000
+    return distance * rate;
+    // return rate * 1000
   }
 
    // Method for precise rounding of floats

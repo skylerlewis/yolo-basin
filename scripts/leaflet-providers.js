@@ -634,6 +634,22 @@
 				maxZoom: 18,
 				subdomains: '0123',
 			}
+		},
+		USGSTNM: {
+			url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',
+			options: {
+				maxZoom: 20,
+				attribution: 'U.S. Department of the Interior | U.S. Geological Survey'
+				},
+			variants: {
+				USTopo: {},
+				USImagery: {
+					url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}'
+				},
+				USImageryTopo: {
+					url: 'https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}'
+				}
+				}
 		}
 	};
 

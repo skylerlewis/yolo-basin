@@ -256,9 +256,10 @@ a, a:visited, a:hover {
   color: white;
   font-size: smaller;
 }
-/* .nav-heading-item-selected {
+.nav-heading-item-selected {
   background-color: goldenrod;
-}*/
+}
+
 /* .nav-bar-fixed {
   position: absolute;
   top: 60px;
