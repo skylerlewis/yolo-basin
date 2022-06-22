@@ -290,7 +290,7 @@ a, a:visited, a:hover {
 }
 
 
-
+/* STYLE SHEET FOR BIRD TAXON TOOLTIP */
 
 .taxon {
   font-weight: bold;
@@ -333,7 +333,11 @@ a, a:visited, a:hover {
   border-color: #555 transparent transparent transparent;
 }*/
 
-.taxon:hover .tooltip {
+.taxon:hover, .taxon:active {
+  color: #00718f;
+}
+
+.taxon:hover .tooltip, .taxon:active .tooltip {
   visibility: visible;
   opacity: 1;
 }
@@ -361,6 +365,6 @@ a, a:visited, a:hover {
   text-decoration: none;
 }
 
-.tooltip ul li a:hover {
+.tooltip ul li a:hover, .tooltip ul li a:active {
   color: goldenrod;
 }

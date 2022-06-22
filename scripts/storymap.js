@@ -4,49 +4,18 @@ $(window).on('load', function() {
   // Some constants, such as default settings
   const CHAPTER_ZOOM = 15;
 
-  // First, try reading Options.csv
+  // Get CSV inputs and use to execute initMap function
   $.get('csv/Options.csv', function(options) {
-
     $.get('csv/Chapters.csv', function(chapters) {
-      initMap(
-        $.csv.toObjects(options),
-        $.csv.toObjects(chapters)
+      $.get('csv/Galleries.csv', function(galleries) {
+        initMap(
+          $.csv.toObjects(options),
+          $.csv.toObjects(chapters),
+          $.csv.toObjects(galleries),
       )
-    }).fail(function(e) { alert('Found Options.csv, but could not read Chapters.csv') });
-
-  // If not available, try from the Google Sheet
-  }).fail(function(e) {
-
-    var parse = function(res) {
-      return Papa.parse(Papa.unparse(res[0].values), {header: true} ).data;
-    }
-
-    // First, try reading data from the Google Sheet
-    if (typeof googleDocURL !== 'undefined' && googleDocURL) {
-
-      if (typeof googleApiKey !== 'undefined' && googleApiKey) {
-
-        var apiUrl = 'https://sheets.googleapis.com/v4/spreadsheets/'
-        var spreadsheetId = googleDocURL.split('/d/')[1].split('/')[0];
-
-        $.when(
-          $.getJSON(apiUrl + spreadsheetId + '/values/Options?key=' + googleApiKey),
-          $.getJSON(apiUrl + spreadsheetId + '/values/Chapters?key=' + googleApiKey),
-        ).then(function(options, chapters) {
-          initMap(parse(options), parse(chapters))
-        })
-
-      } else {
-        alert('You load data from a Google Sheet, you need to add a free Google API key')
-      }
-
-    } else {
-      alert('You need to specify a valid Google Sheet (googleDocURL)')
-    }
-
+    })
   })
-
-
+});
 
   /**
   * Reformulates documentSettings as a dictionary, e.g.
@@ -131,7 +100,7 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
-  function initMap(options, chapters) {
+  function initMap(options, chapters, galleries) {
     createDocumentSettings(options);
 
     var chapterContainerMargin = 20; // this needs to match .chapter-container top+bottom margin in CSS
@@ -225,6 +194,9 @@ $(window).on('load', function() {
       }
     }
 
+    // get galleries accessor, e.g. g['clinton'] for clinton gallery
+    g = groupArrayOfObjects(galleries, "Gallery");
+
     for (i in chapters) {
       var c = chapters[i];
       var cPrev = chapters[i-1];
@@ -297,8 +269,8 @@ $(window).on('load', function() {
         }).append(media).after(source);
       }
 
-      // Gallery
-      
+      // Gallery in media link
+      /*
       if (c['Media Link'] && c['Media Link'].substring(0, 1) == '[') {
         mediaContainer = $('<div></div>', {
           class: 'gallery-container'
@@ -329,7 +301,42 @@ $(window).on('load', function() {
         }
 
         mediaContainer.after(source);
+      } */
+
+      // Gallery v2
+      if (c['Media Link'] && c['Media Link'].substring(0, 8) == 'gallery:') {
+        mediaContainer = $('<div></div>', {
+          class: 'gallery-container'
+        })
+
+        var galleryId = c['Media Link'].substring(8,);
+        var galleryItems = g[galleryId];
+        
+        for (i in galleryItems) {
+          media = $('<img>', {
+            src: galleryItems[i]['Image'],
+            alt: galleryItems[i]['Caption'],
+            class: i == 0 ? 'gallery-first-item' : 'gallery-other-item',
+          });  
+
+          var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
+          if (enableLightbox) {
+            var lightboxWrapper = $('<a></a>', {
+              'data-lightbox': galleryItems,
+              'href': galleryItems[i]['Image'],
+              'data-alt': galleryItems[i]['Caption'],
+              'data-title': galleryItems[i]['Caption'],
+            });
+            media = lightboxWrapper.append(media);
+          };
+          
+          mediaContainer.append(media);
+
+        }
+
+        mediaContainer.after(source);
       }
+
 
       // If not YouTube: either audio or image
       var mediaTypes = {
@@ -361,8 +368,8 @@ $(window).on('load', function() {
           var lightboxWrapper = $('<a></a>', {
             'data-lightbox': c['Media Link'],
             'href': c['Media Link'],
-            // 'data-title': c['Chapter'],
-            // 'data-alt': c['Chapter'],
+            'data-title': c['Media Credit'],
+            'data-alt': c['Media Credit'],
           });
           media = lightboxWrapper.append(media);
         }
@@ -821,5 +828,12 @@ $(window).on('load', function() {
    return Math.round(n) / p;
  }
 
-});
+  function groupArrayOfObjects(list, key) {
+   // https://www.codegrepper.com/code-examples/javascript/how+to+group+similar+data+in+javascript
+  return list.reduce(function(rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
 
+});

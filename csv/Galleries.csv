@@ -1,0 +1,4 @@
+Gallery,Sequence,Image,Caption,Cover
+clinton,1,media/clinton2.jpg,Test caption 1,
+clinton,2,media/clinton1.jpg,Test caption 2,
+clinton,3,media/clinton3.jpg,Test caption 3,TRUE
