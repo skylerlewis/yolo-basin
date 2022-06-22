@@ -373,7 +373,10 @@ $(window).on('load', function() {
       container
         .append(media ? mediaContainer : '')
         .append(media ? source : '')
-        .append('<p class="description">' + c['Description'] + '</p>');
+        .append($('<div class="description-wrapper">')
+          .append('<p class="description-main">' + c['Description'] + '</p>')
+          .append(c['Description 2'] ? '<p class="description-detail">' + c['Description 2'] + '</p>' : '')
+        );
 
       $('#contents').append(container);
 
@@ -634,14 +637,21 @@ $(window).on('load', function() {
       }
     }
 
+    /* back to top button at the bottom */
     $('#contents').append(" \
       <div id='space-at-the-bottom'> \
-        <a href='#top'>  \
+        <a href='#1'>  \
           <i class='fa fa-chevron-up'></i></br> \
           <small>Top</small>  \
         </a> \
       </div> \
     ");
+    $('#space-at-the-bottom a').click(function() {
+      $('#contents').animate({
+        scrollTop: 0
+      }, 0) 
+     });
+
 
     endPixels = parseInt(getSetting('_pixelsAfterFinalChapter'));
     if (endPixels > 100) {
