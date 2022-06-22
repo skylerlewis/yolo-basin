@@ -288,3 +288,79 @@ a, a:visited, a:hover {
 .leaflet-shadow-pane {
   display: none;
 }
+
+
+
+
+.taxon {
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.taxon .tooltip {
+  visibility: hidden;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1;
+  background-color: #00718fdd;
+  opacity: 0;
+  transition: opacity 0.3s;
+/*  visibility: hidden;
+  width: 350px;
+  background-color: #555555dd;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  */
+}
+
+/*.taxon .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}*/
+
+.taxon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-title {
+  color: white;
+  text-transform:uppercase;
+  font-size: 12px;
+  text-align: center;
+}
+
+.tooltip ul {
+  margin: 5px;
+  padding: 0px;
+  font-size: 10px;
+}
+.tooltip ul li {
+  list-style: none;
+}
+.tooltip ul li a {
+  display: block;
+  margin: 3px;
+  padding: 3px;
+  color: white;
+  text-decoration: none;
+}
+
+.tooltip ul li a:hover {
+  color: goldenrod;
+}

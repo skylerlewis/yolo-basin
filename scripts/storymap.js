@@ -89,14 +89,15 @@ $(window).on('load', function() {
     //    transparency: 'true', 
     //    opacity: 0.5,
     //}).addTo(map);
-
-    L.tileLayer.provider('Esri.WorldImagery', {
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '© Esri',
       minZoom: 0,
       maxZoom: 11, 
       transparency: 'true', 
       opacity: 0.5,
     }).addTo(map);
-    L.tileLayer.provider('USGSTNM.USImagery', {
+    L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '© USGS',
       minZoom: 12,
       maxZoom: 20, 
       transparency: 'true', 
@@ -107,20 +108,27 @@ $(window).on('load', function() {
 
   /** Loads label tiles and adds them to the map */
   function addLabelOverlay() {
-    // var Stamen_TerrainLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
+    map.createPane('labels');
+    map.getPane('labels').style.zIndex = 650;
+    map.getPane('labels').style.pointerEvents = 'none';
+    var stamenLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
+      attribution: '© OpenStreetMap, © Stamen',
+      subdomains: 'abcd',
+      ext: 'png',
+      pane: 'labels',
+      opacity: 0.5,
+    }).addTo(map);
+    // var stamenLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
+    //   // attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     //   subdomains: 'abcd',
-    //   minZoom: 0,
-    //   maxZoom: 18,
-    //   ext: 'png'
-    // }).addTo(map);
-    // var Stamen_TerrainLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
-    //   attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    //   subdomains: 'abcd',
-    //   minZoom: 0,
-    //   maxZoom: 18,
     //   ext: 'png',
+    //   pane: 'labels',
     //   opacity: 0.5,
     //   }).addTo(map);
+    var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+      attribution: '© CartoDB',
+      pane: 'labels'
+    }).addTo(map);
   }
 
   function initMap(options, chapters) {
@@ -143,11 +151,11 @@ $(window).on('load', function() {
       /*$('#header').css('padding-top', '25px');*/
     }
     // Click logo to go back to top
-    $('#logo').click(function() {
-      $('#contents').animate({
-        scrollTop: 0
-      }, 0) // getDuration(0, '#contents', 0.5))
-     });
+    // $('#logo').click(function() {
+    //   $('#contents').animate({
+    //     scrollTop: 0
+    //   }, 0) // getDuration(0, '#contents', 0.5))
+    //  });
 
     // Load tiles
     addBaseMap();
@@ -755,6 +763,25 @@ $(window).on('load', function() {
       gtag('config', ga);
     }
 
+    // Create tooltips for birds
+    $('.taxon').each(function() {
+      var taxon = $(this).attr('data-taxon');
+      var tooltipTitle = $(this).text();
+      var tooltipLinks = $('<ul>')
+        .append($('<li>').append('<a href="https://www.allaboutbirds.org/guide/' + taxon + '" target=_blank>Bird Guide</a>'))
+        .append($('<li>').append('<a href="https://ebird.org/barchart?r=L443535&spp=' + taxon + '" target=_blank>Seasonal Frequency</a>'))
+        .append($('<li>').append('<a href="https://ebird.org/map/' + taxon + '?env.minX=-121.671&env.minY=38.502&env.maxX=-121.571&env.maxY=38.602" target=_blank>Local Observation Map</a>'))
+        .append($('<li>').append('<a href="https://ebird.org/science/status-and-trends/' + taxon + '/abundance-map" target=_blank>Global Abundance Map</a>'))
+        .append($('<li>').append('<a href="https://search.macaulaylibrary.org/catalog?regionCode=L443535&taxonCode=' + taxon + '" target=_blank>Photo Library</a>'))
+        ;
+      var tooltip = $('<div>', {
+        class: 'tooltip',
+      })
+      //.append('<span class=tooltip-title>' + tooltipTitle + '</span>')
+      .append(tooltipLinks);
+      $(this).append(tooltip);
+    });
+
   }
 
   /**
@@ -766,7 +793,7 @@ $(window).on('load', function() {
     var layerCreditWrapper = $('<div>', {
       id: 'layer-credit-wrapper',
     });
-    $('.leaflet-control-attribution')[0].innerHTML = credit + ' | ' + attributionHTML;
+    $('.leaflet-control-attribution')[0].innerHTML = credit + ' | Built with ' + attributionHTML;
     $('.leaflet-control-attribution').prepend(layerCreditWrapper);
   }
 
