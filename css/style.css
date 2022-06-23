@@ -108,28 +108,48 @@ body {
 }
 
 .source {
-  font-size: 9pt;
+  font-size: 0.7em;
   font-style: italic;
-  color: gray;
+  color: #00000088;
   padding: 0 20px;
 }
 a.source:visited {
   color: grey;
 }
 
+.image {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+}
+
 .description-wrapper {
-  margin: 10px;
-  padding: 10px;
+  margin: 5px 10px;
+  padding: 5px 10px;
 }
 
 .description-main {
   text-align: left;
   font-size: 1.2em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
 }
 
 .description-detail {
   text-align: left;
-  font-size: 0.8em;
+  font-size: 1.0em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: lighter;
+}
+
+.description-main strong, .description-main .taxon {
+  font-weight: bolder;
+}
+
+.description-detail strong, .description-detail .taxon {
+  font-weight: normal;
 }
 
 .in-focus {
@@ -211,12 +231,10 @@ a, a:visited, a:hover {
   white-space: nowrap;
   overflow-x: scroll;
   overflow-y: hidden;
-  background-color: black; 
 }
 
 .gallery-first-item, .gallery-other-item {
   display: inline;
-  border: 5px black solid;
 }
 
 /* legend overlay for desktop view */

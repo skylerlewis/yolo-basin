@@ -315,6 +315,7 @@ $(window).on('load', function() {
         for (i in galleryItems) {
           media = $('<img>', {
             src: galleryItems[i]['Image'],
+            //data-src: galleryItems[i]['Image'], // future compatability for lazy load images
             alt: galleryItems[i]['Caption'],
             class: i == 0 ? 'gallery-first-item' : 'gallery-other-item',
           });  
@@ -354,7 +355,7 @@ $(window).on('load', function() {
       var mediaExt = c['Media Link'] ? c['Media Link'].split('.').pop().toLowerCase() : '';
       var mediaType = mediaTypes[mediaExt];
 
-      if (mediaType) {
+      /* if (mediaType) {
         media = $('<' + mediaType + '>', {
           src: c['Media Link'],
           controls: mediaType != 'img' ? 'controls' : '',
@@ -374,11 +375,38 @@ $(window).on('load', function() {
           media = lightboxWrapper.append(media);
         }
 
-        mediaContainer = $('<div></div', {
+        mediaContainer = $('<div>', {
           class: mediaType + '-container'
         }).append(media).after(source);
-      }
+      } */
       
+      if (mediaType) {
+        if (mediaType == 'img') {
+          media = $('<div>', {
+            class: 'image',
+            //data-src: c['Media Link'], // future compatability for lazy loading images
+            }).css({'background-image': 'url(' + c['Media Link'] + ')'});
+        var lightboxWrapper = $('<a></a>', {
+          'data-lightbox': c['Media Link'],
+          'href': c['Media Link'],
+          'data-title': c['Media Credit'],
+          'data-alt': c['Media Credit'],
+        });
+        media = lightboxWrapper.append(media);
+      } else {
+        media = $('<' + mediaType + '>', {
+          src: c['Media Link'],
+          controls: mediaType != 'img' ? 'controls' : '',
+          autoplay: mediaType === 'video' ? 'autoplay' : '',
+          muted: mediaType === 'video' ? 'muted' : '',
+          alt: c['Chapter']
+        });
+      }
+        mediaContainer = $('<div>', {
+          class: mediaType + '-container'
+        }).append(media).after(source);
+    }
+
       if (c['Chapter']) {
         // container.append('<h2 class="chapter-header" id = "' + c['Chapter Slug'] + '">' + c['Chapter'] + '</h2>')
         // headingList.push([c['Chapter'], c['Chapter Slug']]);
@@ -408,11 +436,13 @@ $(window).on('load', function() {
       });
     }
     
+    var scrollThreshold = 80;
+
     // For each block (chapter), calculate how many pixels above it
     var titleHeight = $('div#title').outerHeight(true);
     var headerHeight = $('div#header').outerHeight(true);
     var navHeight = $('div#nav').outerHeight(true);
-    pixelsAbove[0] = headerHeight + navHeight - 100; // this controls how far down you have to scroll to trigger the next chapter
+    pixelsAbove[0] = headerHeight + navHeight - scrollThreshold; // this controls how far down you have to scroll to trigger the next chapter
     for (i = 1; i < chapters.length; i++) {
       // pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i-1)).height() + chapterContainerMargin;
       // pixelsAbove[i] = pixelsAbove[i-1] + $('div#container' + (i)).outerHeight(true);
@@ -727,6 +757,8 @@ $(window).on('load', function() {
       navBar.append(headingList[i]['wrapper']);
     }
     $('div#nav').append(navBar);
+    // fix the height in place
+    $('div#nav').css({'height': $('#nav-bar').outerHeight()});
 
     var titleHeight = $('div#title').outerHeight(true);
     var headerHeight = $('div#header').outerHeight(true);
@@ -736,7 +768,7 @@ $(window).on('load', function() {
     for (i in headingList) {
       headingList[i]['button'].data('position', $('#container' + headingList[i]['index']).offset().top);
       headingList[i]['button'].click(function() {
-        var target = $(this).data('position') - titleHeight - navHeight - 120
+        var target = $(this).data('position') - titleHeight - navHeight - scrollThreshold; // - 120
         $('#contents').animate({
           scrollTop: target
         }, 0) // getDuration(target, '#contents', 0.5))
@@ -749,7 +781,7 @@ $(window).on('load', function() {
     } else {
       var containerId = parseInt(location.hash.slice(1)) - 1;
       if (containerId > 0) {
-        var target = $('#container' + containerId).offset().top - titleHeight - navHeight - 120;
+        var target = $('#container' + containerId).offset().top - titleHeight - navHeight - scrollThreshold; //- 120;
         // scroll to 120 pixels from top of scroll area
         $('#contents').animate({
           scrollTop: target 
@@ -775,9 +807,10 @@ $(window).on('load', function() {
       var taxon = $(this).attr('data-taxon');
       var tooltipTitle = $(this).text();
       var tooltipLinks = $('<ul>')
+        // region codes: US-CA_239=Yolo Bypass, L443535=YBWA, L2498310=AutoLoop, L2357110=GreensLake, L109286=South
         .append($('<li>').append('<a href="https://www.allaboutbirds.org/guide/' + taxon + '" target=_blank>Bird Guide</a>'))
-        .append($('<li>').append('<a href="https://ebird.org/barchart?r=L443535&spp=' + taxon + '" target=_blank>Seasonal Frequency</a>'))
-        .append($('<li>').append('<a href="https://ebird.org/map/' + taxon + '?env.minX=-121.671&env.minY=38.502&env.maxX=-121.571&env.maxY=38.602" target=_blank>Local Observation Map</a>'))
+        .append($('<li>').append('<a href="https://ebird.org/barchart?r=US-CA_239&spp=' + taxon + '" target=_blank>Seasonal Frequency</a>'))
+        //.append($('<li>').append('<a href="https://ebird.org/map/' + taxon + '?env.minX=-121.671&env.minY=38.502&env.maxX=-121.571&env.maxY=38.602" target=_blank>Local Observation Map</a>'))
         .append($('<li>').append('<a href="https://ebird.org/science/status-and-trends/' + taxon + '/abundance-map" target=_blank>Global Abundance Map</a>'))
         .append($('<li>').append('<a href="https://search.macaulaylibrary.org/catalog?regionCode=L443535&taxonCode=' + taxon + '" target=_blank>Photo Library</a>'))
         ;

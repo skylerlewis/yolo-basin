@@ -65,8 +65,16 @@
     height: inherit !important;
     margin-left: auto;
     margin-right: auto;
+    border: none !important;
   }
-
+  .lb-closeContainer {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+  .lb-close {
+    margin: 10px;
+  }
   /*.nav-bar-fixed {
     white-space: normal;
   }*/
