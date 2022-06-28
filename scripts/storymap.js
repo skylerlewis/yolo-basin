@@ -8,11 +8,14 @@ $(window).on('load', function() {
   $.get('csv/Options.csv', function(options) {
     $.get('csv/Chapters.csv', function(chapters) {
       $.get('csv/Galleries.csv', function(galleries) {
-        initMap(
-          $.csv.toObjects(options),
-          $.csv.toObjects(chapters),
-          $.csv.toObjects(galleries),
-      )
+        $.get('csv/Birds.csv', function(birds) {
+          initMap(
+            $.csv.toObjects(options),
+            $.csv.toObjects(chapters),
+            $.csv.toObjects(galleries),
+            $.csv.toObjects(birds),
+        )
+      })
     })
   })
 });
@@ -100,7 +103,7 @@ $(window).on('load', function() {
     }).addTo(map);
   }
 
-  function initMap(options, chapters, galleries) {
+  function initMap(options, chapters, galleries, birds) {
     createDocumentSettings(options);
 
     var chapterContainerMargin = 20; // this needs to match .chapter-container top+bottom margin in CSS
@@ -196,6 +199,9 @@ $(window).on('load', function() {
 
     // get galleries accessor, e.g. g['clinton'] for clinton gallery
     g = groupArrayOfObjects(galleries, "Gallery");
+
+    // get bird taxon accessor, e.g. b['norsho'][0] for northern shoveler
+    b = groupArrayOfObjects(birds, "Taxon ID");
 
     for (i in chapters) {
       var c = chapters[i];
@@ -805,20 +811,29 @@ $(window).on('load', function() {
     // Create tooltips for birds
     $('.taxon').each(function() {
       var taxon = $(this).attr('data-taxon');
-      var tooltipTitle = $(this).text();
+      //var tooltipTitle = //$(this).text();
+      var tooltipTitle = b[taxon] ? b[taxon][0]['Common Name'] : '';
+      var tooltipSubtitle = b[taxon] ? b[taxon][0]['Scientific Name'] : '';
+      var tooltipImageId = b[taxon] ? b[taxon][0]['Plate'] : '';
+      var tooltipImage = $('<img>', {
+        class: 'tooltip-image',
+        src: 'media/boa_plates_web/' + tooltipImageId + '.jpg',
+      });
       var tooltipLinks = $('<ul>')
         // region codes: US-CA_239=Yolo Bypass, L443535=YBWA, L2498310=AutoLoop, L2357110=GreensLake, L109286=South
         .append($('<li>').append('<a href="https://www.allaboutbirds.org/guide/' + taxon + '" target=_blank>Bird Guide</a>'))
         .append($('<li>').append('<a href="https://ebird.org/barchart?r=US-CA_239&spp=' + taxon + '" target=_blank>Seasonal Frequency</a>'))
         //.append($('<li>').append('<a href="https://ebird.org/map/' + taxon + '?env.minX=-121.671&env.minY=38.502&env.maxX=-121.571&env.maxY=38.602" target=_blank>Local Observation Map</a>'))
-        .append($('<li>').append('<a href="https://ebird.org/science/status-and-trends/' + taxon + '/abundance-map" target=_blank>Global Abundance Map</a>'))
+        .append($('<li>').append('<a href="https://ebird.org/science/status-and-trends/' + taxon + '/abundance-map?static=true" target=_blank>Range & Abundance Maps</a>'))
         .append($('<li>').append('<a href="https://search.macaulaylibrary.org/catalog?regionCode=L443535&taxonCode=' + taxon + '" target=_blank>Photo Library</a>'))
         ;
       var tooltip = $('<div>', {
         class: 'tooltip',
       })
-      //.append('<span class=tooltip-title>' + tooltipTitle + '</span>')
-      .append(tooltipLinks);
+      .append('<p class=tooltip-title>' + tooltipTitle + '</p>')
+      .append('<p class=tooltip-subtitle>' + tooltipSubtitle + '</p>')
+      .append(tooltipLinks)
+      .append(tooltipImage);
       $(this).append(tooltip);
     });
 

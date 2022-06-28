@@ -1,4 +1,12 @@
 Gallery,Sequence,Image,Caption,Cover
-clinton,1,media/clinton2.jpg,Test caption 1,
-clinton,2,media/clinton1.jpg,Test caption 2,
-clinton,3,media/clinton3.jpg,Test caption 3,TRUE
+clinton,1,media/dedication/clinton3.jpg,Test caption 1,
+clinton,2,media/dedication/dedication2.jpg,Test caption 2,
+clinton,3,media/dedication/dedication1.jpg,Test caption 3,TRUE
+clinton,4,media/dedication/dedication3.jpg,Test caption 4,
+clinton,5,media/dedication/dedication4.jpg,Test caption 5,
+demowetlands,2,media/discover_demowetlands.jpg,,
+demowetlands,3,media/education1.jpg,,
+demowetlands,4,media/education2.jpg,,
+demowetlands,5,media/education3.jpg,,
+education,1,media/schoolbus.jpg,,
+education,2,media/discover_ybwa.jpg,,
