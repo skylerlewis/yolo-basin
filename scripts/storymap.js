@@ -1,5 +1,13 @@
 $(window).on('load', function() {
+
   var documentSettings = {};
+
+  // var lazyLoadInstance = new LazyLoad({
+  //   //container: document.querySelector(".scrollingPanel"),
+  //   container: document.getElementById("contents"),
+  //   //container: document.querySelector("#contents"),
+  //   use_native: true,
+  // });
 
   // Some constants, such as default settings
   const CHAPTER_ZOOM = 15;
@@ -15,6 +23,7 @@ $(window).on('load', function() {
             $.csv.toObjects(galleries),
             $.csv.toObjects(birds),
         )
+        //lazyLoadInstance.update();
       })
     })
   })
@@ -102,8 +111,9 @@ $(window).on('load', function() {
       pane: 'labels'
     }).addTo(map);
   }
+  
+  function initMap(options, chapters, galleries, birds) { 
 
-  function initMap(options, chapters, galleries, birds) {
     createDocumentSettings(options);
 
     var chapterContainerMargin = 20; // this needs to match .chapter-container top+bottom margin in CSS
@@ -320,10 +330,12 @@ $(window).on('load', function() {
         
         for (i in galleryItems) {
           media = $('<img>', {
-            src: galleryItems[i]['Image'],
-            //data-src: galleryItems[i]['Image'], // future compatability for lazy load images
-            alt: galleryItems[i]['Caption'],
-            class: i == 0 ? 'gallery-first-item' : 'gallery-other-item',
+            //'src': "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E",
+            //'data-src': galleryItems[i]['Image'],
+            'src': galleryItems[i]['Image'],
+            'loading': 'lazy',
+            'alt': galleryItems[i]['Caption'],
+            'class': i == 0 ? 'gallery-first-item' : 'gallery-other-item',
           });  
 
           var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
@@ -388,10 +400,14 @@ $(window).on('load', function() {
       
       if (mediaType) {
         if (mediaType == 'img') {
-          media = $('<div>', {
-            class: 'image',
-            //data-src: c['Media Link'], // future compatability for lazy loading images
-            }).css({'background-image': 'url(' + c['Media Link'] + ')'});
+          media = $('<img>', {
+            'class': 'image',
+            //'src': "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E",
+            //'data-src': c['Media Link'],
+            'src': c['Media Link'],
+            'loading': 'lazy',
+            'alt': c['Media Credit'],
+            }) //.css({'background-image': 'url(' + c['Media Link'] + ')'});
         var lightboxWrapper = $('<a></a>', {
           'data-lightbox': c['Media Link'],
           'href': c['Media Link'],
@@ -686,6 +702,7 @@ $(window).on('load', function() {
           break;
         }
       }
+
     }
 
     /* back to top button at the bottom */
