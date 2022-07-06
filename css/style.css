@@ -32,6 +32,17 @@ body {
   height: 100%; 
   overflow-y: scroll;
   overflow-x: hidden;
+  scrollbar-width: 12px;
+  scrollbar-color: #edf7fa #00718f;
+}
+
+#contents::-webkit-scrollbar {
+  width: 12px;
+  background-color: #edf7fa; /*#00718f33;*/
+}
+
+#contents::-webkit-scrollbar-thumb {
+  background: #00718f;
 }
 
 #top {
@@ -233,6 +244,8 @@ a, a:visited, a:hover {
   white-space: nowrap;
   overflow-x: scroll;
   overflow-y: hidden;
+  scrollbar-width: 12px;
+  scrollbar-color: #00718f00 #00718f;
 }
 
 .gallery-first-item, .gallery-other-item {
@@ -240,8 +253,14 @@ a, a:visited, a:hover {
   height: auto;
   width: auto;
   max-height: 100%;
-  max-width: 100%;
+}
 
+.gallery-container::-webkit-scrollbar {
+  height: 12px;
+  background-color: #00718f00; /*#00718f33;*/
+}
+.gallery-container::-webkit-scrollbar-thumb {
+  background: #00718f;
 }
 
 /* legend overlay for desktop view */

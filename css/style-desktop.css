@@ -75,6 +75,10 @@
   .lb-close {
     margin: 10px;
   }
+  #nav-bar {
+    margin-right: 12px;
+  }
+  
   /*.nav-bar-fixed {
     white-space: normal;
   }*/

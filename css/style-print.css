@@ -1,0 +1,51 @@
+@media print {
+
+    #map {
+        display: none;
+    }
+
+    #narration{
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #contents{
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: visible;
+    }
+
+    #title{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .chapter-container{
+        border-bottom: 1px gray solid;
+        page-break-inside: avoid;
+    }
+
+    .out-focus {
+        opacity: 1.0;
+    }
+
+    .gallery-container{
+        display: block;
+        position:static;
+        width: auto;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        white-space: normal;
+    }
+
+    .img-container img, .gallery-container img {
+        height: 2in;
+        object-fit: contain;
+    }
+
+  }

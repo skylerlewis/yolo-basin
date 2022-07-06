@@ -341,7 +341,7 @@ $(window).on('load', function() {
           var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
           if (enableLightbox) {
             var lightboxWrapper = $('<a></a>', {
-              'data-lightbox': galleryItems,
+              'data-lightbox': galleryId,
               'href': galleryItems[i]['Image'],
               'data-alt': galleryItems[i]['Caption'],
               'data-title': galleryItems[i]['Caption'],
