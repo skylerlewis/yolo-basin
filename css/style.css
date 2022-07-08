@@ -441,3 +441,8 @@ a, a:visited, a:hover {
   top: 100% !important; 
   transform: translateY(0) !important;
 }
+
+/* LIGHTBOX */
+.lb-image {
+  border: none !important;
+}
