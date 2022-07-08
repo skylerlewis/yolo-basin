@@ -7,6 +7,10 @@ body {
   color: #333333
 }
 
+body a {
+  text-decoration: none;
+}
+
 #map {
   height: 200px;
   width: 100vw;
@@ -402,6 +406,9 @@ a, a:visited, a:hover {
   font-weight: lighter;
   font-style: italic;
   margin-top:0px;
+}
+.tooltip-subtitle em {
+  font-weight: lighter;
 }
 
 .tooltip ul {

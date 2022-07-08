@@ -89,27 +89,34 @@ $(window).on('load', function() {
 
   /** Loads label tiles and adds them to the map */
   function addLabelOverlay() {
-    map.createPane('labels');
-    map.getPane('labels').style.zIndex = 650;
-    map.getPane('labels').style.pointerEvents = 'none';
+    map.createPane('labelPane');
+    map.getPane('labelPane').style.zIndex = 401;
+    // future edit: all types of items to different panes, to facilitate stacking
+    map.getPane('labelPane').style.pointerEvents = 'none';
     var stamenLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
       attribution: '© OpenStreetMap, © Stamen',
       subdomains: 'abcd',
       ext: 'png',
-      pane: 'labels',
+      pane: 'labelPane',
       opacity: 0.5,
     }).addTo(map);
     // var stamenLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
-    //   // attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    //   subdomains: 'abcd',
-    //   ext: 'png',
-    //   pane: 'labels',
-    //   opacity: 0.5,
-    //   }).addTo(map);
-    var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-      attribution: '© CartoDB',
-      pane: 'labels'
-    }).addTo(map);
+      //   // attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      //   subdomains: 'abcd',
+      //   ext: 'png',
+      //   pane: 'labelPane',
+      //   opacity: 0.5,
+      //   }).addTo(map);
+      var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+        attribution: '© CartoDB',
+        pane: 'labelPane'
+      }).addTo(map);
+      // also create a pane for overlays that need to go on top of labels
+      map.createPane('topTilePane');
+      map.getPane('topTilePane').style.zIndex = 402;
+      map.createPane('topOverlayPane');
+      map.getPane('topOverlayPane').style.zIndex = 403;
+      // fmi https://leafletjs.com/reference.html#map-pane
   }
   
   function initMap(options, chapters, galleries, birds) { 
@@ -253,7 +260,12 @@ $(window).on('load', function() {
 
       // Add media source
       var source = '';
-      if (c['Media Credit Link']) {
+      if (c['Media Credit']) {
+        source = $('<span>', {
+          class: 'source'
+        }).append(c['Media Credit'])
+      }
+      /*if (c['Media Credit Link']) {
         source = $('<a>', {
           text: c['Media Credit'],
           href: c['Media Credit Link'],
@@ -265,7 +277,7 @@ $(window).on('load', function() {
           text: c['Media Credit'],
           class: 'source'
         });
-      }
+      }*/
 
       // YouTube or Google Drive video embed
       if (c['Media Link'] 
@@ -598,6 +610,7 @@ $(window).on('load', function() {
               }
 
               geoJsonOverlay = L.geoJson(geojson, {
+                pane: c['Top Level Overlay'] ? 'topOverlayPane' : 'overlayPane',
                 style: function(feature) {
                   return {
                     stroke: feature.properties.stroke || props.stroke || true,
@@ -636,6 +649,7 @@ $(window).on('load', function() {
               }
 
               geoJsonOverlay2 = L.geoJson(geojson, {
+                pane: c['Top Level Overlay'] ? 'topOverlayPane' : 'overlayPane',
                 style: function(feature) {
                   return {
                     stroke: feature.properties.stroke || props.stroke || true,
@@ -668,7 +682,9 @@ $(window).on('load', function() {
                 // remove the existing overlay layer
                 map.removeLayer(overlay);
                 // make a new overlay layer
-                overlay = L.tileLayer(c['Tile Overlay']).addTo(map);
+                overlay = L.tileLayer(c['Tile Overlay'], {
+                  pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
+                }).addTo(map);
               }
 
             } else {
@@ -798,8 +814,8 @@ $(window).on('load', function() {
       });
     }
 
-    // On first load, check hash and if it contains an number, scroll down, else update map from initial location
-    if (!parseInt(location.hash.slice(1))) {
+    // On first load, check hash and if it contains an number > 1, scroll down, else update map from initial location
+    if ((!parseInt(location.hash.slice(1))) | parseInt(location.hash.slice(1))==1) {
       updateMap(initial = true);
     } else {
       var containerId = parseInt(location.hash.slice(1)) - 1;
