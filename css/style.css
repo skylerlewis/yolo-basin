@@ -182,17 +182,48 @@ a.source:visited {
   visibility: hidden;
 }
 
+
+/*
+By default, current (active) marker is orange.
+If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
+*/
+/*
 .leaflet-marker-icon {
   opacity: 0.75;
 }
-
-/*
-  By default, current (active) marker is orange.
-  If you want to change the color, see options here: https://github.com/coryasilva/Leaflet.ExtraMarkers/blob/master/src/assets/css/leaflet.extra-markers.css
-*/
 .marker-active {
   background-position: -72px 0 !important;
 }
+*/
+
+/* style for basic img icon */
+.leaflet-marker-icon {
+  object-position: left;
+  object-fit: cover;
+}
+/* style for div icon; this supports numbers */
+.leaflet-marker-icon-div {
+  background-image: url("../markers/pin.svg");
+  background-size: cover;
+  background-position-x: left;
+  margin: 0 auto;
+  text-align:center;
+  color:white;
+  font-weight: bold;   
+}
+.leaflet-marker-icon-div p {
+  margin: 0;
+  position: relative;
+  top: 7px;
+} 
+/* style for active icon, either of the above */
+.marker-active {
+  object-position: right;
+  background-position-x: right;
+  color: black;
+  z-index: 9999 !important;
+}
+
 
 /* Storymap logo image above the title */
 #logo {

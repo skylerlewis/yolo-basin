@@ -196,6 +196,7 @@ $(window).on('load', function() {
 
     var pixelsAbove = [];
     var chapterCount = 0;
+    var numberedMarkerCount = 0;
 
     var currentlyInFocus; // integer to specify each chapter is currently in focus
     var overlay;  // URL of the overlay for in-focus chapter
@@ -231,17 +232,39 @@ $(window).on('load', function() {
 
         chapterCount += 1;
 
-        markers.push(
-          L.marker([lat, lon], {
-            icon: L.ExtraMarkers.icon({
-              icon: 'fa-number',
-              number: c['Marker'] === 'Plain' ? '' : chapterCount,
-              markerColor: c['Marker Color'] || 'blue'
+        if (c['Marker'] === 'Numbered') {
+          numberedMarkerCount += 1
+        }
+
+        // var marker = L.marker([lat, lon], {
+        //   icon: L.icon({
+        //     iconUrl: 'markers/pin.svg',
+        //     iconSize:     [36, 36], // size of the icon
+        //     iconAnchor:   [18, 33], // point of the icon which will correspond to marker's location
+        //   }),
+        //   opacity: c['Marker'] === 'Hidden' ? 0 : 0.75,
+        //   interactive: c['Marker'] === 'Hidden' ? false : true,
+        // }
+
+        var markerNumber = chapterCount;
+        var markerNumber = numberedMarkerCount;
+
+        var marker = L.marker([lat, lon], {
+          icon: L.divIcon({
+            className: "leaflet-marker-icon-div",
+            iconSize:     [36, 36], // size of the icon
+            iconAnchor:   [18, 33], // point of the icon which will correspond to marker's location
+            html: c['Marker'] === 'Numbered' ? '<p>' + markerNumber + '</p>' : null,
             }),
-            opacity: c['Marker'] === 'Hidden' ? 0 : 0.9,
-            interactive: c['Marker'] === 'Hidden' ? false : true,
-          }
-        ));
+          opacity: c['Marker'] === 'Hidden' ? 0 : 0.75,
+          interactive: c['Marker'] === 'Hidden' ? false : true,
+        });
+        
+        //if (c['Marker'] === 'Numbered') {
+        //  marker.append(chapterCount);
+        //}
+
+        markers.push(marker);
 
       } else {
         markers.push(null);
@@ -488,7 +511,9 @@ $(window).on('load', function() {
     var currentSection = '';
 
     // Execute whenever the map scrolls, or on initial load
+    //$('div#contents').on('scrollend', updateMap);
     $('div#contents').scroll(updateMap);
+
     function updateMap(initial = false) {
       //var currentPosition = $(this).scrollTop();
       var currentPosition = $('div#contents').scrollTop();
@@ -630,9 +655,6 @@ $(window).on('load', function() {
               }).addTo(map);
             });
 
-            //if (!(c['Latitude'] && c['Longitude'])) {
-            //  map.fitBounds(geoJsonOverlay.getBounds());
-            //}
           }
           
           if (c['GeoJSON Overlay 2']) {
@@ -669,7 +691,8 @@ $(window).on('load', function() {
               }).addTo(map);
             });
           }
-          
+        
+
           // Add chapter's overlay tiles if specified in options
           if (c['Tile Overlay']) {
 
@@ -714,6 +737,16 @@ $(window).on('load', function() {
           // and close the lightbox if it's open
           closeLightbox();
 
+          // zoom to geojson if specified
+          // currently not working on initial load, need to fix
+          if ((c['Zoom to GeoJSON'])) { 
+            map.flyToBounds(geoJsonOverlay.getBounds(), {
+              maxZoom: 17,
+              animate: true,
+              duration: 0.75, // default is 2 seconds
+            });
+          }
+
           // No need to iterate through the following chapters
           break;
         }
@@ -753,7 +786,7 @@ $(window).on('load', function() {
         markers[i].on('click', function() {
           var pixels = parseInt($(this)[0]['_pixelsAbove']) +20 ;
           $('div#contents').animate({
-            scrollTop: pixels + 'px'});
+            scrollTop: pixels + 'px'}, 0);
         });
         bounds.push(markers[i].getLatLng());
 

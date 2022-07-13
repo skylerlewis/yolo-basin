@@ -15,14 +15,20 @@ education,media/schoolbus.jpg,
 education,media/discover_ybwa.jpg,
 localsupport,media/planning4_vicfazio.jpg,
 localsupport,media/planning3_betsymarchand.jpg,
-flood-control-structures,media/dwr_photos/PJH_Fremont_Weir-0054.jpg,Fremont Weir (Paul J Hames / CA DWR)
-flood-control-structures,media/dwr_photos/PJH_Sacramento_Weir-0036.jpg,Sacramento Weir (Paul J Hames / CA DWR)
+flood-control-structures,media/dwr_photos/PJH_Fremont_Weir-0054.jpg,"Fremont Weir with Yolo Bypass to the left, Sacramento River to the right (Paul J Hames / CA DWR)"
+flood-control-structures,media/dwr_photos/1920_01_30_zz_000926_Sac_Weir.jpg,"Sacramento Weir shortly after construction, 1921 (CA DWR)"
+flood-control-structures,media/dwr_photos/1921_01_29_zz_00917_Sac_Weir.jpg,"Sacramento Weir shortly after construction, 1921 (CA DWR)"
+flood-control-structures,media/dwr_photos/FL_Flood_Aerials-8961.jpg,Sacramento Weir overtopping on 13 January 2017 (Florence Low / CA DWR)
+flood-control-structures,media/dwr_photos/2006_03_02_SP_0024_Sac_Weir.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR) 
+flood-control-structures-x,media/dwr_photos/FL_Flood_Aerials-8835.jpg,Fremont Weir overtopping on 13 January 2017 (Florence Low / CA DWR)
 flooding,media/dwr_bypass_flow_97_98.jpg,"Aerial photo mosaic from the March 1998 flood event, showing visible sediment plumes corresponding to flows from the four major tributaries of the Yolo Bypass. Source: Department of Water Resources, as published in Sommer, Harrell & Swift (2008). Extreme hydrologic banding in a large-river Floodplain, California, U.S.A. Hydrobiologia 598(1):409-415. doi:<a href=http://doi.org/10.1007/s10750-007-9159-1 target=_blank>10.1007/s10750-007-9159-1</a>"
-flooding,media/dwr_photos/2006_01_03_SP_0244_flood_aerials.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR)
-flooding,media/dwr_photos/2006_01_03_SP_0256_flood_aerials.jpg,Sacramento Weir during winter 2006 floods - Yolo Bypass in the distance (Steve Payer / CA DWR)
-flooding,media/dwr_photos/2006_03_02_SP_0024_Sac_Weir.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR) 
+flooding,media/dwr_photos/PJH_Fremont_Weir-0100.jpg,The Sacramento River (right) overtopping the Fremont Weir and spilling into the Yolo Bypass on 30 March 2011 (Paul J Hames / CA DWR) 
+flooding,media/dwr_photos/PJH_Sacramento_Weir-0036.jpg,Sacramento Weir on 30 March 2011. High water levels are seeping through the weir's plank needles but the gates have not yet been fully opened (Paul J Hames / CA DWR)
+flooding,media/dwr_photos/PJH_Cache_Creek_Weir-0059.jpg,"Cache Creek Setting Basin Weir, where Cache Creek flows into the Yolo Bypass, on 30 March 2011. Note the visible differences in sediment load (Paul J Hames / CA DWR)"
 flooding,media/ybwa_flood1.jpg,
 flooding,media/ybwa_flood2.jpg,
+flooding-x,media/dwr_photos/2006_01_03_SP_0244_flood_aerials.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR)
+flooding-x,media/dwr_photos/2006_01_03_SP_0256_flood_aerials.jpg,Sacramento Weir during winter 2006 floods - Yolo Bypass in the distance (Steve Payer / CA DWR)
 rice,media/rice_harvest1.jpg,
 rice,media/dwr_photos/PJH_Yolo_Bypass-0229.jpg,Sep 2009 (Paul J Hames / CA DWR)
 rice-flooded,media/rice_flooding.jpg,
@@ -71,3 +77,9 @@ causeway-history,media/history/crossing_yolo_basin_tule_jack_road.jpg,Crossing t
 causeway-history,media/history/2002-0063_000170262.jpg,"Hand-colored postcard showing the causeway over Yolo Basin, c. 1920. Source: <a href=https://calisphere.org/item/7d92bb653afabed3d2bc3acfc878dcb3/ target=_blank>California State Library via Calisphere</a>."
 causeway-history,media/history/yolo_causeway_celebraiton.jpg,Poster advertising the four-day celebration of the opening of the causeway. Source: <a href=https://wildlife.ca.gov/Lands/Planning/Yolo-Bypass-WA target=_blank>Yolo Bypass Wildlife Area Land Management Plan</a>
 causeway-history,media/history/2012-1951_000110739.jpg,"Photographic postcard showing the causeway over Yolo Basin, c. 1916. Source: <a href=https://calisphere.org/item/a40c6417727df1abba700390b0263092/ target=_blank>California State Library via Calisphere</a>."
+los-rios-check-dam,media/fishpassage/YBPdamOct2005.jpg,"Los Rios Check Dam with flash boards
+installed during irrigation season (October 2005 photo by Tim Salamunovich via 20 September 2018 Normandeau Associates memorandum)."
+los-rios-check-dam,media/fishpassage/KDavis_LosRiosDam-Update_2018-04-19.jpg,"Los Rios Check Dam with flash boards
+removed to allow fish passage (19 April 2018 photo by Ken Davis via 20 September 2018 Normandeau Associates memorandum)."
+big-notch,media/dwr_photos/2022_06_23_JW_0012_Big_Notch_Groundbreaking.jpg,"Signage for the 23 June 2022 groundbreaking of the Fremont Weir ""Big Notch"" project (Jonathan Wong / CA DWR)"
+big-notch,media/dwr_photos/2022_05_05_KG_5406_Fremont_Weir.JPG,Fremont Weir on 5 May 2022 prior to the start of construction of the Big Notch Project. Yolo Bypass is seen to the left of the weir and the Sacramento River to the right. (Kelly M Grow / CA DWR)
