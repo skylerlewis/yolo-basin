@@ -10,8 +10,14 @@ $(window).on('load', function() {
   // });
 
   // Some constants, such as default settings
-  const CHAPTER_ZOOM = 15;
-  const DETECT_RETINA = false;
+  const MAX_ZOOM = 16;
+
+  // Get preferences from query string
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  // Force retina display with ?retina=true, otherwise default to false
+  const DETECT_RETINA = urlParams.has('retina') ? urlParams.get('retina') : false;
 
   // Get CSV inputs and use to execute initMap function
   $.get('csv/Options.csv', function(options) {
@@ -68,21 +74,22 @@ $(window).on('load', function() {
     // ESRI basemap for global/regional scale
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '© Esri',
-      //minZoom: 0,
-      //maxZoom: 10, 
+      minZoom: 0,
+      maxZoom: 11, 
       transparency: true, 
       opacity: 0.5,
       detectRetina: DETECT_RETINA,
     }).addTo(map);
-    // NAIP imagery for finer detail
-    //L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
-    //  attribution: '© USGS',
-    //  minZoom: 11,
-    //  maxZoom: 20, 
-    //  transparency: true, 
-    //  opacity: 0.6,
-    //  detectRetina: DETECT_RETINA,
-    //}).addTo(map);
+     // NAIP imagery for finer detail
+    L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '© USGS',
+      minZoom: DETECT_RETINA ? (L.Browser.retina ? 11 : 12) : 12,
+      maxZoom: 20,
+      maxNativeZoom: DETECT_RETINA ? (L.Browser.retina ? 15 : 16) : 16, 
+      transparency: true, 
+      opacity: 0.6,
+      detectRetina: DETECT_RETINA,
+    }).addTo(map);
 
   }
 
@@ -94,19 +101,22 @@ $(window).on('load', function() {
     // future edit: all types of items to different panes, to facilitate stacking
     map.getPane('labelPane').style.pointerEvents = 'none';
 
-    var stamenLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
+    stamenLinesUrlBase = 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}';
+    stamenLinesUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
+    var stamenLines = L.tileLayer(stamenLinesUrlBase + stamenLinesUrlSuffix, {
       attribution: '© OpenStreetMap, © Stamen',
       subdomains: 'abcd',
       ext: 'png',
       pane: 'labelPane',
       opacity: 0.5,
-      detectRetina: DETECT_RETINA,
     });
     stamenLines.addTo(map);
-    var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+    positronUrlBase = 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}';
+    positronUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
+    var positronLabels = L.tileLayer(positronUrlBase + positronUrlSuffix, {
       attribution: '© CartoDB',
       pane: 'labelPane',
-      detectRetina: DETECT_RETINA,
+      opacity: 0.75,
     });
     positronLabels.addTo(map);
 
@@ -674,26 +684,26 @@ $(window).on('load', function() {
             if (map.hasLayer(overlay)) {
               
               // currentTileUrl = overlay.getUrl(); // need to figure out how to get tile URL
-              var currentTileUrl = overlay.getUrl;
+              var currentTileUrl = null;
+
+              var maxNativeZoomLevel = c['Max Native Zoom'] ? parseInt(c['Max Native Zoom']) : MAX_ZOOM;
+              var overlayParams = {
+                pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
+                detectRetina: DETECT_RETINA,
+                maxNativeZoom: DETECT_RETINA ? (L.Browser.retina ? (maxNativeZoomLevel - 1) : maxNativeZoomLevel) : maxNativeZoomLevel,
+              }
               
+              // var tileUrlRetina = c['Tile Overlay Retina'] ? c['Tile Overlay Retina'] : c['Tile Overlay'];
+              // var tileUrl = DETECT_RETINA ? (L.Browser.retina ? tileUrlRetina : c['Tile Overlay']) : c['Tile Overlay'];
+
               if (c['Tile Overlay'] != currentTileUrl) {
-                // remove the existing overlay layer
                 map.removeLayer(overlay);
-                // make a new overlay layer
-                overlay = L.tileLayer(c['Tile Overlay'], {
-                  pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
-                  detectRetina: DETECT_RETINA,
-                  maxNativeZoom: c['Max Native Zoom'],
-                });
+                overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
                 overlay.addTo(map);
               }
 
             } else {
-              // create a new overlay layer if one doesn't already exist
-              overlay = L.tileLayer(c['Tile Overlay'], {
-                detectRetina: DETECT_RETINA,
-                maxNativeZoom: c['Max Native Zoom'],
-              });
+              overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
               overlay.addTo(map);
             }
             
@@ -725,7 +735,7 @@ $(window).on('load', function() {
           // currently not working on initial load, need to fix
           if ((c['Zoom to GeoJSON'])) { 
             map.flyToBounds(geoJsonOverlay.getBounds(), {
-              maxZoom: 17,
+              maxZoom: MAX_ZOOM,
               animate: true,
               duration: 0.75, // default is 2 seconds
             });
