@@ -22,7 +22,7 @@ whtkit,White-tailed Kite,Elanus leucurus,Elanus,leucurus,plate-352-black-winged-
 marwre,Marsh Wren,Cistothorus palustris,Cistothorus,palustris,plate-100-marsh-wren
 gwfgoo,Greater White-fronted Goose,Anser albifrons,Anser,albifrons,plate-286-white-fronted-goose
 yerwar,Yellow-rumped Warbler,Setophaga coronata,Setophaga,coronata,
-greyel,Greater Yellowlegs,Tringa melanoleuca,Tringa,melanoleuca,plate-288-yellow-shank
+greyel,Greater Yellowlegs,Tringa melanoleuca,Tringa,melanoleuca,plate-308-tell-tale-godwit-or-snipe
 bknsti,Black-necked Stilt,Himantopus mexicanus,Himantopus,mexicanus,plate-328-long-legged-avocet
 killde,Killdeer,Charadrius vociferus,Charadrius,vociferus,plate-225-kildeer-plover
 rudduc,Ruddy Duck,Oxyura jamaicensis,Oxyura,jamaicensis,plate-343-ruddy-duck
@@ -51,9 +51,9 @@ canvas,Canvasback,Aythya valisineria,Aythya,valisineria,plate-301-canvas-backed-
 bcnher,Black-crowned Night-Heron,Nycticorax nycticorax,Nycticorax,nycticorax,plate-236-night-heron
 ruckin,Ruby-crowned Kinglet,Corthylio calendula,Corthylio,calendula,
 coohaw,Cooper's Hawk,Accipiter cooperii,Accipiter,cooperii,
-lobdow,Long-billed Dowitcher,Limnodromus scolopaceus,Limnodromus,scolopaceus,
+lobdow,Long-billed Dowitcher,Limnodromus scolopaceus,Limnodromus,scolopaceus,plate-335-red-breasted-snipe
 amecro,American Crow,Corvus brachyrhynchos,Corvus,brachyrhynchos,
-wilsni1,Wilson's Snipe,Gallinago delicata,Gallinago,delicata,
+wilsni1,Wilson's Snipe,Gallinago delicata,Gallinago,delicata,plate-243-american-snipe
 houfin,House Finch,Haemorhous mexicanus,Haemorhous,mexicanus,
 whfibi,White-faced Ibis,Plegadis chihi,Plegadis,chihi,plate-387-glossy-ibis
 comgol,Common Goldeneye,Bucephala clangula,Bucephala,clangula,plate-403-golden-eye-duck
@@ -105,7 +105,7 @@ wessan,Western Sandpiper,Calidris mauri,Calidris,mauri,
 daejun,Dark-eyed Junco,Junco hyemalis,Junco,hyemalis,
 gresca,Greater Scaup,Aythya marila,Aythya,marila,plate-229-scaup-duck
 dowwoo,Downy Woodpecker,Dryobates pubescens,Dryobates,pubescens,
-merlin,Merlin,Falco columbarius,Falco,columbarius,
+merlin,Merlin,Falco columbarius,Falco,columbarius,plate-92-pigeon-hawk
 swaspa,Swamp Sparrow,Melospiza georgiana,Melospiza,georgiana,
 eurwig,Eurasian Wigeon,Mareca penelope,Mareca,penelope,
 eucdov,Eurasian Collared-Dove,Streptopelia decaocto,Streptopelia,decaocto,
@@ -203,9 +203,9 @@ litsti,Little Stint,Calidris minuta,Calidris,minuta,
 bubsan,Buff-breasted Sandpiper,Calidris subruficollis,Calidris,subruficollis,
 pecsan,Pectoral Sandpiper,Calidris melanotos,Calidris,melanotos,
 semsan,Semipalmated Sandpiper,Calidris pusilla,Calidris,pusilla,plate-405-semipalmated-sandpiper
-shbdow,Short-billed Dowitcher,Limnodromus griseus,Limnodromus,griseus,
+shbdow,Short-billed Dowitcher,Limnodromus griseus,Limnodromus,griseus,plate-335-red-breasted-snipe
 wilpha,Wilson's Phalarope,Phalaropus tricolor,Phalaropus,tricolor,plate-254-wilsons-phalarope
-renpha,Red-necked Phalarope,Phalaropus lobatus,Phalaropus,lobatus,
+renpha,Red-necked Phalarope,Phalaropus lobatus,Phalaropus,lobatus,plate-215-hyperborean-phalarope
 redpha1,Red Phalarope,Phalaropus fulicarius,Phalaropus,fulicarius,
 solsan,Solitary Sandpiper,Tringa solitaria,Tringa,solitaria,
 willet1,Willet,Tringa semipalmata,Tringa,semipalmata,plate-274-semipalmated-snipe
