@@ -64,12 +64,7 @@ $(window).on('load', function() {
    * Loads the basemap and adds it to the map
    */
   function addBaseMap() {
-    //var basemap = trySetting('_tileProvider', 'Stamen.TonerLite');
-    //L.tileLayer.provider(basemap, {
-    //    maxZoom: 18, 
-    //    transparency: 'true', 
-    //    opacity: 0.5,
-    //}).addTo(map);
+    // ESRI basemap for global/regional scale
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '© Esri',
       minZoom: 0,
@@ -77,6 +72,7 @@ $(window).on('load', function() {
       transparency: 'true', 
       opacity: 0.5,
     }).addTo(map);
+    // NAIP imagery for finer detail
     L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
       attribution: '© USGS',
       minZoom: 12,
@@ -89,34 +85,32 @@ $(window).on('load', function() {
 
   /** Loads label tiles and adds them to the map */
   function addLabelOverlay() {
+
     map.createPane('labelPane');
     map.getPane('labelPane').style.zIndex = 401;
     // future edit: all types of items to different panes, to facilitate stacking
     map.getPane('labelPane').style.pointerEvents = 'none';
+
     var stamenLines = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}{r}.{ext}', {
       attribution: '© OpenStreetMap, © Stamen',
       subdomains: 'abcd',
       ext: 'png',
       pane: 'labelPane',
       opacity: 0.5,
-    }).addTo(map);
-    // var stamenLabels = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-labels/{z}/{x}/{y}{r}.{ext}', {
-      //   // attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      //   subdomains: 'abcd',
-      //   ext: 'png',
-      //   pane: 'labelPane',
-      //   opacity: 0.5,
-      //   }).addTo(map);
-      var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-        attribution: '© CartoDB',
-        pane: 'labelPane'
-      }).addTo(map);
-      // also create a pane for overlays that need to go on top of labels
-      map.createPane('topTilePane');
-      map.getPane('topTilePane').style.zIndex = 402;
-      map.createPane('topOverlayPane');
-      map.getPane('topOverlayPane').style.zIndex = 403;
-      // fmi https://leafletjs.com/reference.html#map-pane
+    });
+    stamenLines.addTo(map);
+    var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+      attribution: '© CartoDB',
+      pane: 'labelPane'
+    });
+    positronLabels.addTo(map);
+
+    // also create a pane for overlays that need to go on top of labels
+    // fmi https://leafletjs.com/reference.html#map-pane
+    map.createPane('topTilePane');
+    map.getPane('topTilePane').style.zIndex = 402;
+    map.createPane('topOverlayPane');
+    map.getPane('topOverlayPane').style.zIndex = 403;
   }
   
   function initMap(options, chapters, galleries, birds) { 
@@ -407,42 +401,15 @@ $(window).on('load', function() {
 
       var mediaExt = c['Media Link'] ? c['Media Link'].split('.').pop().toLowerCase() : '';
       var mediaType = mediaTypes[mediaExt];
-
-      /* if (mediaType) {
-        media = $('<' + mediaType + '>', {
-          src: c['Media Link'],
-          controls: mediaType != 'img' ? 'controls' : '',
-          autoplay: mediaType === 'video' ? 'autoplay' : '',
-          muted: mediaType === 'video' ? 'muted' : '',
-          alt: c['Chapter']
-        });
-
-        var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
-        if (enableLightbox && mediaType === 'img') {
-          var lightboxWrapper = $('<a></a>', {
-            'data-lightbox': c['Media Link'],
-            'href': c['Media Link'],
-            'data-title': c['Media Credit'],
-            'data-alt': c['Media Credit'],
-          });
-          media = lightboxWrapper.append(media);
-        }
-
-        mediaContainer = $('<div>', {
-          class: mediaType + '-container'
-        }).append(media).after(source);
-      } */
       
       if (mediaType) {
         if (mediaType == 'img') {
           media = $('<img>', {
             'class': 'image',
-            //'src': "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E",
-            //'data-src': c['Media Link'],
             'src': c['Media Link'],
             'loading': 'lazy',
             'alt': c['Media Credit'],
-            }) //.css({'background-image': 'url(' + c['Media Link'] + ')'});
+            })
         var lightboxWrapper = $('<a></a>', {
           'data-lightbox': c['Media Link'],
           'href': c['Media Link'],
@@ -533,8 +500,10 @@ $(window).on('load', function() {
         $('#nav-bar').css('position', 'static');
       }
       
+      // define what happens when we scroll
       for (var i = 0; i < pixelsAbove.length - 1; i++) {
-
+        
+        // execute the following if we have scrolled to a new section
         if ( (currentPosition >= pixelsAbove[i]
           && currentPosition < (pixelsAbove[i+1] - 2 * chapterContainerMargin)
           && currentlyInFocus != i) | initial
@@ -652,7 +621,9 @@ $(window).on('load', function() {
                     fillRule: feature.properties.fillRule || props.fillRule || 'evenodd',
                   }
                 }
-              }).addTo(map);
+              });
+
+              geoJsonOverlay.addTo(map);
             });
 
           }
@@ -688,7 +659,9 @@ $(window).on('load', function() {
                     fillRule: feature.properties.fillRule || props.fillRule || 'evenodd',
                   }
                 }
-              }).addTo(map);
+              });
+              
+              geoJsonOverlay2.addTo(map);
             });
           }
         
@@ -707,14 +680,17 @@ $(window).on('load', function() {
                 // make a new overlay layer
                 overlay = L.tileLayer(c['Tile Overlay'], {
                   pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
-                }).addTo(map);
+                });
+                overlay.addTo(map);
               }
 
             } else {
               // create a new overlay layer if one doesn't already exist
-              overlay = L.tileLayer(c['Tile Overlay']).addTo(map);
+              overlay = L.tileLayer(c['Tile Overlay']);
+              overlay.addTo(map);
             }
-
+            
+            
           } else {
             // remove the overlay layer if it's not needed
             if (map.hasLayer(overlay)) {
