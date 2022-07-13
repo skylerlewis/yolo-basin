@@ -11,6 +11,7 @@ $(window).on('load', function() {
 
   // Some constants, such as default settings
   const CHAPTER_ZOOM = 15;
+  const DETECT_RETINA = false;
 
   // Get CSV inputs and use to execute initMap function
   $.get('csv/Options.csv', function(options) {
@@ -67,19 +68,21 @@ $(window).on('load', function() {
     // ESRI basemap for global/regional scale
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: '© Esri',
-      minZoom: 0,
-      maxZoom: 11, 
-      transparency: 'true', 
+      //minZoom: 0,
+      //maxZoom: 10, 
+      transparency: true, 
       opacity: 0.5,
+      detectRetina: DETECT_RETINA,
     }).addTo(map);
     // NAIP imagery for finer detail
-    L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '© USGS',
-      minZoom: 12,
-      maxZoom: 20, 
-      transparency: 'true', 
-      opacity: 0.6,
-    }).addTo(map);
+    //L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}', {
+    //  attribution: '© USGS',
+    //  minZoom: 11,
+    //  maxZoom: 20, 
+    //  transparency: true, 
+    //  opacity: 0.6,
+    //  detectRetina: DETECT_RETINA,
+    //}).addTo(map);
 
   }
 
@@ -97,11 +100,13 @@ $(window).on('load', function() {
       ext: 'png',
       pane: 'labelPane',
       opacity: 0.5,
+      detectRetina: DETECT_RETINA,
     });
     stamenLines.addTo(map);
     var positronLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
       attribution: '© CartoDB',
-      pane: 'labelPane'
+      pane: 'labelPane',
+      detectRetina: DETECT_RETINA,
     });
     positronLabels.addTo(map);
 
@@ -143,6 +148,10 @@ $(window).on('load', function() {
     // Load tiles
     addBaseMap();
     addLabelOverlay();
+
+    // add empty LayerGroup to contain any geojson overlays
+    var jsonLayers = L.layerGroup([]);
+    jsonLayers.addTo(map);
 
     // Add scale
     L.control.scale({
@@ -520,14 +529,6 @@ $(window).on('load', function() {
           currentlyInFocus = i;
           markActiveColor(currentlyInFocus);
 
-          // Remove GeoJson overlay layer(s) existing
-          // if (map.hasLayer(geoJsonOverlay)) {
-          //   map.removeLayer(geoJsonOverlay);
-          // }
-          // if (map.hasLayer(geoJsonOverlay2)) {
-          //   map.removeLayer(geoJsonOverlay2);
-          // }        
-
           var c = chapters[i];
 
           // if the section heading has changed
@@ -580,12 +581,13 @@ $(window).on('load', function() {
           }
           
           // Remove GeoJson overlay layer(s) existing
-          if (map.hasLayer(geoJsonOverlay)) {
-            map.removeLayer(geoJsonOverlay);
-          }
-          if (map.hasLayer(geoJsonOverlay2)) {
-            map.removeLayer(geoJsonOverlay2);
-          }     
+          jsonLayers.clearLayers();
+          //if (map.hasLayer(geoJsonOverlay)) {
+          //  map.removeLayer(geoJsonOverlay);
+          //}
+          //if (map.hasLayer(geoJsonOverlay2)) {
+          //  map.removeLayer(geoJsonOverlay2);
+          //}
 
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {
@@ -603,7 +605,7 @@ $(window).on('load', function() {
                 }
               }
 
-              geoJsonOverlay = L.geoJson(geojson, {
+              var geoJsonOverlay = L.geoJson(geojson, {
                 pane: c['Top Level Overlay'] ? 'topOverlayPane' : 'overlayPane',
                 style: function(feature) {
                   return {
@@ -623,7 +625,7 @@ $(window).on('load', function() {
                 }
               });
 
-              geoJsonOverlay.addTo(map);
+              geoJsonOverlay.addTo(jsonLayers);
             });
 
           }
@@ -641,7 +643,7 @@ $(window).on('load', function() {
                 }
               }
 
-              geoJsonOverlay2 = L.geoJson(geojson, {
+              var geoJsonOverlay2 = L.geoJson(geojson, {
                 pane: c['Top Level Overlay'] ? 'topOverlayPane' : 'overlayPane',
                 style: function(feature) {
                   return {
@@ -661,7 +663,7 @@ $(window).on('load', function() {
                 }
               });
               
-              geoJsonOverlay2.addTo(map);
+              geoJsonOverlay2.addTo(jsonLayers);
             });
           }
         
@@ -672,7 +674,7 @@ $(window).on('load', function() {
             if (map.hasLayer(overlay)) {
               
               // currentTileUrl = overlay.getUrl(); // need to figure out how to get tile URL
-              currentTileUrl = null;
+              var currentTileUrl = overlay.getUrl;
               
               if (c['Tile Overlay'] != currentTileUrl) {
                 // remove the existing overlay layer
@@ -680,16 +682,22 @@ $(window).on('load', function() {
                 // make a new overlay layer
                 overlay = L.tileLayer(c['Tile Overlay'], {
                   pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
+                  detectRetina: DETECT_RETINA,
+                  maxNativeZoom: c['Max Native Zoom'],
                 });
                 overlay.addTo(map);
               }
 
             } else {
               // create a new overlay layer if one doesn't already exist
-              overlay = L.tileLayer(c['Tile Overlay']);
+              overlay = L.tileLayer(c['Tile Overlay'], {
+                detectRetina: DETECT_RETINA,
+                maxNativeZoom: c['Max Native Zoom'],
+              });
               overlay.addTo(map);
             }
             
+            overlay.setOpacity(c['Tile Overlay Opacity'] ? c['Tile Overlay Opacity'] : 1);
             
           } else {
             // remove the overlay layer if it's not needed
