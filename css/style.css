@@ -180,6 +180,10 @@ a.source:visited {
 
 .leaflet-control-attribution {
   visibility: hidden;
+  font-size: smaller;
+  font-family: 'Libre Franklin';
+  line-height: 1.2em;
+  padding: 0.5em;
 }
 
 
