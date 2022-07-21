@@ -1,0 +1,10 @@
+@media screen and (max-width: 767px) {
+    #nav-bar {
+        /* override the sticky menu on mobile to optimize screen real estate*/
+        position: static !important;
+    }
+    #logo {
+        height: 32px;
+        padding: 8px;
+    }
+}

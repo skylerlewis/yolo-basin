@@ -12,17 +12,17 @@ body a {
 }
 
 #map {
-  height: 200px;
+  height: 250px;
   width: 100vw;
   position: absolute;
-  border-bottom: 3px solid orange;
+  /*border-bottom: 3px solid goldenrod; */
   top: 0;
   left: 0;
 }
 
 #narration {
-  position: absolute; /* try relative */
-  top: 203px;
+  position: absolute; 
+  top: 250px; /* should match height of #map plus some buffer if desired */
   width: 100vw;
   height: calc(100vh - 203px);
   z-index: 80;

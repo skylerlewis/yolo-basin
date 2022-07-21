@@ -460,8 +460,8 @@ $(window).on('load', function() {
         .append(media ? mediaContainer : '')
         .append(media ? source : '')
         .append($('<div class="description-wrapper">')
-          .append('<p class="description-main">' + c['Description'] + '</p>')
-          .append(c['Description 2'] ? '<p class="description-detail">' + c['Description 2'] + '</p>' : '')
+          .append('<div class="description-main">' + c['Description'] + '</div>')
+          .append(c['Description 2'] ? '<div class="description-detail">' + c['Description 2'] + '</div>' : '')
         );
 
       $('#contents').append(container);
