@@ -1,7 +1,9 @@
 @media screen and (max-width: 767px) {
     #nav-bar {
         /* override the sticky menu on mobile to optimize screen real estate*/
-        position: static !important;
+        position: static !important; 
+        /*overflow-x: scroll;
+        white-space: nowrap;*/
     }
     #logo {
         height: 32px;

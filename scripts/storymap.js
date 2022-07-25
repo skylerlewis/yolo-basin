@@ -514,9 +514,11 @@ $(window).on('load', function() {
       // Make navbar fix to top on scroll
       if (currentPosition >= titleHeight + headerHeight) {
         $('#nav-bar').css('position', 'absolute').css('top',titleHeight);
+        $('#back-to-top').css('visibility', 'visible');
       }
       if (currentPosition < titleHeight + headerHeight) {
         $('#nav-bar').css('position', 'static');
+        $('#back-to-top').css('visibility', 'hidden');
       }
       
       // define what happens when we scroll
@@ -825,6 +827,12 @@ $(window).on('load', function() {
     $('div#nav').append(navBar);
     // fix the height in place
     $('div#nav').css({'height': $('#nav-bar').outerHeight()});
+
+    // Create back-to-top link for mobile
+    $('div#back-to-top').click(function(){
+      $('div#contents').animate({
+        scrollTop: '0px'}, 0);
+    });
 
     var titleHeight = $('div#title').outerHeight(true);
     var headerHeight = $('div#header').outerHeight(true);

@@ -481,3 +481,16 @@ a, a:visited, a:hover {
 .lb-image {
   border: none !important;
 }
+
+#back-to-top {
+  position: absolute;
+  background-color: #00718f;
+  color: white;
+  z-index: 9999;
+  width: 1.5em;
+  height: 1.5em;
+  font-size: 1em;
+  top: 5px;
+  right: 5px;
+  visibility: hidden;
+}

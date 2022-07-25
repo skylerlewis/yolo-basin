@@ -82,4 +82,8 @@
     white-space: normal;
   }*/
 
+  #back-to-top {
+    visibility: hidden !important;
+}
+
 }
