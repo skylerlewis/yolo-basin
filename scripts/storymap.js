@@ -479,7 +479,7 @@ $(window).on('load', function() {
       });
     }
     
-    var scrollThreshold = 80;
+    var scrollThreshold = 120 //80;
 
     // For each block (chapter), calculate how many pixels above it
     var titleHeight = $('div#title').outerHeight(true);
