@@ -169,6 +169,10 @@ a.source:visited {
   font-weight: normal;
 }
 
+.tooltip {
+  font-style: normal;
+}
+
 .in-focus {
   opacity: 1.0;
   background-color: #edf7fa;
