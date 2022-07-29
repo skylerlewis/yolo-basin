@@ -5,6 +5,7 @@
     height: 100vh;
     max-width: 500px;
     top: 0;
+    box-shadow: 4px 0px 4px #00000033;
     /* border-right: 3px orange solid; */
   }
 
@@ -46,6 +47,18 @@
     border: 0;
     z-index: 0;
   }
+
+  /*
+  #map-overlay{
+    width: calc(100vw - 500px);
+    left: 500px;
+    height: 100vh;
+    border: 0;
+    z-index: 9999999;
+    background-color: black;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }*/
 
   /* Tweaks to the lightbox for screen media */
   .lightboxOverlay {

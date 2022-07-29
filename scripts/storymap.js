@@ -176,6 +176,11 @@ $(window).on('load', function() {
       position: 'topright',
     }).addTo(map);
 
+    // Map is full opacity when clicked
+    $('#map').click(function(){
+      $('#map').css('opacity', 1.0);
+    });
+
     // Initiate the zoom variable
     // var z = parseInt(map.getZoom());
 
@@ -202,6 +207,12 @@ $(window).on('load', function() {
           if (i == k) {
             markers[k]._icon.className += ' marker-active';
           }
+
+          // identify numbered markers
+          // if(chapters[i]['Marker'] == 'Numbered') {
+          //   markers[i]._icon.className.replace('leaflet-marker-icon leaflet-marker-icon-div ', 
+          //                                      'leaflet-marker-icon marker-numbered leaflet-marker-icon-div ');
+          // }
 
         }
       }
@@ -600,6 +611,13 @@ $(window).on('load', function() {
           //if (map.hasLayer(geoJsonOverlay2)) {
           //  map.removeLayer(geoJsonOverlay2);
           //}
+
+          // Fade out the map if there is no marker
+          if (c['Longitude']) {
+            $('#map').css('opacity', 1.0);
+          } else {
+            $('#map').css('opacity', 0.33);
+          }
 
           if (c['GeoJSON Overlay']) {
             $.getJSON(c['GeoJSON Overlay'], function(geojson) {

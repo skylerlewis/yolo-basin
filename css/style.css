@@ -4,7 +4,8 @@ body {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   overflow: hidden;
-  color: #333333
+  color: #333333;
+  background-color: gray;
 }
 
 body a {
@@ -18,6 +19,7 @@ body a {
   /*border-bottom: 3px solid goldenrod; */
   top: 0;
   left: 0;
+  transition: opacity 0.3s, background-color 0.3s;
 }
 
 #narration {
@@ -231,6 +233,10 @@ If you want to change the color, see options here: https://github.com/coryasilva
   color: black;
   z-index: 9999 !important;
 }
+/* temporary adjustment: hide inactive markers 
+.leaflet-marker-icon-div :not(.marker-active) {
+  display: none;
+} */
 
 
 /* Storymap logo image above the title */

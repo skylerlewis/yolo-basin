@@ -9,4 +9,7 @@
         height: 32px;
         padding: 8px;
     }
+    #narration {
+        box-shadow: 0px -4px 4px #00000033;
+    }
 }
