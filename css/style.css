@@ -212,7 +212,7 @@ If you want to change the color, see options here: https://github.com/coryasilva
   object-fit: cover;
 }
 /* style for div icon; this supports numbers */
-.leaflet-marker-icon-div {
+.leaflet-marker-icon-div-numbered, .leaflet-marker-icon-div-plain {
   background-image: url("../markers/pin.svg");
   background-size: cover;
   background-position-x: left;
@@ -221,23 +221,27 @@ If you want to change the color, see options here: https://github.com/coryasilva
   color:white;
   font-weight: bold;   
 }
-.leaflet-marker-icon-div p {
+.leaflet-marker-icon-div-numbered p {
   margin: 0;
   position: relative;
   top: 7px;
 } 
-/* style for active icon, either of the above */
+
+/* active markers are not clickable */
 .marker-active {
+  cursor: default;
+}
+/* active numbered markers are highlighted in the accent color */
+.leaflet-marker-icon-div-numbered.marker-active {
   object-position: right;
   background-position-x: right;
   color: black;
   z-index: 9999 !important;
 }
-/* temporary adjustment: hide inactive markers 
-.leaflet-marker-icon-div :not(.marker-active) {
-  display: none;
-} */
-
+/* inactive non-numbered markers are hidden */
+.leaflet-marker-icon-div-plain:not(.marker-active){
+  display: none !important;
+}
 
 /* Storymap logo image above the title */
 #logo {

@@ -275,7 +275,7 @@ $(window).on('load', function() {
 
         var marker = L.marker([lat, lon], {
           icon: L.divIcon({
-            className: "leaflet-marker-icon-div",
+            className: c['Marker'] === 'Numbered' ? "leaflet-marker-icon-div-numbered" : "leaflet-marker-icon-div-plain",
             iconSize:     [36, 36], // size of the icon
             iconAnchor:   [18, 33], // point of the icon which will correspond to marker's location
             html: c['Marker'] === 'Numbered' ? '<p>' + markerNumber + '</p>' : null,
