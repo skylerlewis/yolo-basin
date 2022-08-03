@@ -467,6 +467,9 @@ $(window).on('load', function() {
         container.append('<h2 class="chapter-header">' + c['Chapter'] + '</h2>')
         headingList.push({'index': i, 'name': c['Chapter']});
       };
+      if (c['Subchapter']) {
+        container.append('<h3 class="chapter-subheader">' + c['Subchapter'] + '</h3>')
+      };
       container
         .append(media ? mediaContainer : '')
         .append(media ? source : '')

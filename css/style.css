@@ -284,6 +284,13 @@ h2 {
   color: #004557;
 }
 
+h3 {
+  font-size: 1.1em;
+  font-weight: lighter;
+  font-style: italic;
+  color: #004557;
+}
+
 a, a:visited, a:hover {
   color: #6388b6; 
 }
