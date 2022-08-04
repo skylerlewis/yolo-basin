@@ -654,7 +654,6 @@ $(window).on('load', function() {
             });
           }
         
-
           // Add chapter's overlay tiles if specified in options
           if (c['Tile Overlay']) {
 
@@ -665,19 +664,18 @@ $(window).on('load', function() {
               maxNativeZoom: DETECT_RETINA ? (L.Browser.retina ? (maxNativeZoomLevel - 1) : maxNativeZoomLevel) : maxNativeZoomLevel,
             }
 
-            
             if (map.hasLayer(overlay)) {
-              //var currentTileUrl = overlay.getTileUrl(0,0,0);
-              //alert(currentTileUrl);
+              var currentTileUrl = overlay.getTileUrl({x:0,y:0});
+              var newTileUrl = c['Tile Overlay'].replace('{x}','0').replace('{y}','0').replace('{z}',Math.round(map.getZoom()).toString())
 
-              //if (c['Tile Overlay'] != currentTileUrl) {
+              if (newTileUrl != currentTileUrl) {
                 map.removeLayer(overlay);
                 overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
                 overlay.addTo(map);
-              // } 
-              // else {
-              //   // no need to do anything if the correct layer already exists
-              // };
+              } 
+              else {
+                // no need to do anything if the correct layer already exists
+              };
 
             } else {
               overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
