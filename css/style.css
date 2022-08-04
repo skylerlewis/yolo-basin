@@ -401,6 +401,7 @@ a, a:visited, a:hover {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
+  cursor: help;
 }
 
 .taxon .tooltip {

@@ -71,12 +71,21 @@
     var map = L.map('map', {
       center: [0, 0],
       zoom: 1,
-      minZoom: 3,
+      minZoom: 2,
       maxZoom: 16,
       scrollWheelZoom: false,
       zoomControl: false,
-      tap: false
+      tap: false,
     });
+
+    var southWest = L.latLng(-90, -9999),
+        northEast = L.latLng(90, 9999);
+    var bounds = L.latLngBounds(southWest, northEast);
+    map.setMaxBounds(bounds);
+    map.on('drag', function() {
+        map.panInsideBounds(bounds, { animate: false });
+    });
+
     </script>
 
   <div id="legend">

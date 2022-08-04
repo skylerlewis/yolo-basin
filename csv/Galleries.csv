@@ -1,11 +1,12 @@
 Gallery,Image,Caption
+screenshot-taxon,media/screenshot_taxon.png,Roll over bird names for links to species information and charts of seasonality specific to the Yolo Bypass.
 clinton,media/dedication/dedication1.jpg,
 clinton,media/dedication/dedication2.jpg,
 clinton,media/dedication/dedication3.jpg,
 clinton,media/scans/doc_dedication_remarks.jpg,
 clinton,media/scans/doc_dedication_pamphlet_front.jpg,
 clinton,media/scans/doc_dedication_pamphlet_inside.jpg,
-clinton-walk,media/dedication/clinton3.jpg,
+clinton-walk,media/dedication/clinton3.jpg,Courtesy of Davis Enterprise
 clinton-walk,media/dedication/dedication4.jpg,
 demowetlands,media/discover_demowetlands.jpg,
 demowetlands,media/education1.jpg,
@@ -22,22 +23,27 @@ flood-control-structures,media/dwr_photos/FL_Flood_Aerials-8961.jpg,Sacramento W
 flood-control-structures,media/dwr_photos/2006_03_02_SP_0024_Sac_Weir.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR) 
 flood-control-structures-x,media/dwr_photos/FL_Flood_Aerials-8835.jpg,Fremont Weir overtopping on 13 January 2017 (Florence Low / CA DWR)
 flood-control-structures,https://water.weather.gov/resources/hydrographs/fmwc1_record.png,"Current and forecasted <a href=https://water.weather.gov/ahps2/hydrograph.php?wfo=sto&gage=fmwc1&hydro_type=2 target=_blank>Sacramento River stage at the Fremont Weir</a>. At 32 feet, water will overtop Fremont Weir and enter the Yolo Bypass."
+flood-control-structures,media/dfeliz_fremontweir_preflood.jpg,Fremont Weir at high water but before overtopping (D Feliz)
 flooding,media/dwr_bypass_flow_97_98.jpg,"Aerial photo mosaic from the March 1998 flood event, showing visible sediment plumes corresponding to flows from the four major tributaries of the Yolo Bypass. Source: Department of Water Resources, as published in Sommer, Harrell & Swift (2008). Extreme hydrologic banding in a large-river Floodplain, California, U.S.A. Hydrobiologia 598(1):409-415. doi:<a href=http://doi.org/10.1007/s10750-007-9159-1 target=_blank>10.1007/s10750-007-9159-1</a>"
 flooding,media/dwr_photos/PJH_Fremont_Weir-0100.jpg,The Sacramento River (right) overtopping the Fremont Weir and spilling into the Yolo Bypass on 30 March 2011 (Paul J Hames / CA DWR) 
 flooding,media/dwr_photos/PJH_Sacramento_Weir-0036.jpg,Sacramento Weir on 30 March 2011. High water levels are seeping through the weir's plank needles but the gates have not yet been fully opened (Paul J Hames / CA DWR)
 flooding,media/dwr_photos/PJH_Cache_Creek_Weir-0059.jpg,"Cache Creek Setting Basin Weir, where Cache Creek flows into the Yolo Bypass, on 30 March 2011. Note the visible differences in sediment load (Paul J Hames / CA DWR)"
-flooding,media/ybwa_flood1.jpg,
-flooding,media/ybwa_flood2.jpg,
+flooding-ybwa,media/flood2006.jpg,
+flooding-ybwa,media/flood2007.jpg,
+flooding-ybwa,media/ybwa_flood1.jpg,
+flooding-ybwa,media/ybwa_flood2.jpg,
 flooding-x,media/dwr_photos/2006_01_03_SP_0244_flood_aerials.jpg,Sacramento Weir during winter 2006 floods (Steve Payer / CA DWR)
 flooding-x,media/dwr_photos/2006_01_03_SP_0256_flood_aerials.jpg,Sacramento Weir during winter 2006 floods - Yolo Bypass in the distance (Steve Payer / CA DWR)
 rice,media/rice_harvest1.jpg,
 rice,media/dwr_photos/PJH_Yolo_Bypass-0229.jpg,Sep 2009 (Paul J Hames / CA DWR)
 rice-flooded,media/rice_flooding.jpg,
 rice-flooded,media/dwr_photos/SP_Yolo_Bypass-0265.jpg,Mar 2007 (Steve Payer / CA DWR)
-permanent-ponds,media/dwr_photos/PJH_Yolo_Bypass-0155.jpg,Sep 2009 (Paul J Hames / CA DWR)
-permanent-ponds,media/dwr_photos/PJH_Yolo_Bypass-0176.jpg,Sep 2009 (Paul J Hames / CA DWR)
-permanent-ponds,media/sl_pond_egret.jpg,
+rice-flooded,media/geese_rice_field.jpg,
+brood-ponds,media/dwr_photos/PJH_Yolo_Bypass-0155.jpg,Sep 2009 (Paul J Hames / CA DWR)
+brood-ponds,media/dwr_photos/PJH_Yolo_Bypass-0176.jpg,Sep 2009 (Paul J Hames / CA DWR)
+brood-ponds,media/brood_pond_gallinule_michael_reinhart.jpg,Gallinule in a brood pond (Michael Reinhart)
 signing-ceremony,media/planning7_signing.jpg,
+signing-ceremony,media/signing_event.jpg,
 signing-ceremony,media/scans/doc_signing_map.jpg,
 signing-ceremony,media/scans/doc_signing_pamphlet.jpg,
 signing-ceremony,media/scans/doc_signing_release.jpg,
@@ -51,17 +57,25 @@ groundbreaking,media/scans/scan9503_rk_vf.jpg,
 demowetlands-history,media/scans/scan9804_demowetland.jpg,
 demowetlands-history,media/scans/scan9906_aerial_hq.jpg,
 demowetlands-history,media/scans/scan9904_hq_demowetland_veg.jpg,
+demowetlands-history,media/demo_wetland1.jpg,
+demowetlands-history,media/demo_wetland2.jpg,
 demowetlands-history,media/scans/scan0103_pano_demowetland.jpg,
 hq-history,media/scans/scan9703_hq.jpg,
 hq-history,media/scans/scan9702_hq_sign.jpg,
 early-ybwg,media/scans/doc_volunteer_flyer_masked.jpg,
 early-ybwg,media/scans/scan9401_tabling.jpg,
 early-ybwg,media/scans/scan9402_tabling.jpg,
-duckdays,media/duckdays_sign.jpg,
-duckdays,media/scans/scan0002_duckdays.jpg,
-duckdays,media/scans/scan0003_duckdays.jpg,
-duckdays,media/scans/scan0004_duckdays.jpg,
-duckdays,media/scans/doc_duck_days.jpg,
+duckdays-historic,media/duckdays_sign.jpg,
+duckdays-historic,media/scans/scan0002_duckdays.jpg,
+duckdays-historic,media/scans/scan0003_duckdays.jpg,
+duckdays-historic,media/scans/scan0004_duckdays.jpg,
+duckdays-historic,media/scans/doc_duck_days.jpg,
+duckdays-current,media/duck_days_tees.jpg,
+duckdays-current,media/duck_days_cake.jpg,
+duckdays-current,media/duck_days_duck_call_workshop.jpg,
+duckdays-current,media/duck_days_fishing_in_the_city.jpg,
+duckdays-current,media/duck_days_2006_exhibit.jpg,
+duckdays-current,media/duck_days_art_show_2015.jpg,
 putahcreek,media/scans/scan9601_putah.jpg,
 putahcreek,media/scans/scan9907_aerial_putahck.jpg,
 putahcreek,media/scans/scan9403_putah_flood.jpg,
@@ -93,3 +107,45 @@ drainage,media/drainage/drainage_flyer_2.png,Flyer describing drainage improveme
 realignment,media/realignment/map_2010-03.jpg,
 realignment,media/realignment/map_2014-10.jpg,
 realignment,media/realignment/map_2015-02.jpg,
+western-waterfowl,media/westernWaterfowl_dabblers_front.jpg,
+western-waterfowl,media/westernWaterfowl_dabblers_back.jpg,
+western-waterfowl,media/westernWaterfowl_divers_front.jpg,
+western-waterfowl,media/westernWaterfowl_divers_back.jpg,
+restoration2010,media/restoration2010_fig1.jpg,
+restoration2010,media/restoration2010_fig2.jpg,
+restoration2010,media/restoration2010_fig3.jpg,
+teacher-workshops,media/scans/scan9805_training.jpg,
+teacher-workshops,media/teacher_workshop.jpg,
+teacher-workshops,media/teacher_workshop_tule_hut.jpg,"Teacher Workshop (late1990) with the first tule hut, let by Judy Fleenor"
+discover-the-flyway,media/marsh_madness_pond_dip.jpg,
+discover-the-flyway,media/discover_migration_madness.jpg,
+discover-the-flyway,media/discover_flyway_field_trip.jpg,
+discover-the-flyway,media/discover_flyway_wellies.jpg,
+discover-the-flyway,media/discover_volunteers_2008.jpg,
+bat-tours,media/bat_tour_corky.jpg,
+bat-tours,media/bat_sticker.png,
+bat-tours,media/bats1.jpg,
+bat-tours,media/bat_shirt.jpg,
+construction-phase1,media/grading1.jpg,
+construction-phase1,media/seasonal_pond_first_800_acres.jpg,
+construction-phase2,media/restoration_3700_acres.jpg,
+construction-phase2,media/restoration_lotA_pond_1996.jpg,
+seasonal-pond-succession,media/seasonal_pond_drawdown_slough_microhabitat.jpg,Drawdown of seasonal ponds results in temporary microhabitats with water remaining only in the deep slough areas.
+seasonal-pond-succession,media/seasonal_pond_dry.jpg,Seasonal ponds fully dry
+seasonal-pond-succession,media/seasonal_pond_lotA_spring_dowingia.jpg,"The seasonal pond near Lot A in the spring, with blooming dowingia in the background"
+seasonal-pond-succession,media/seasonal_pond_fall_floodup.jpg,Fall flood-up of seasonal ponds
+seasonal-pond-succession,media/seasonal_pond_winter_flooding.jpg,Winter flooding of seasonal ponds
+bucks-for-ducks-historic,media/bucks_for_ducks_91.jpg,Publicity photo for first Bucks for Ducks (1991) with Gary Sandy and Robin Kulakow
+bucks-for-ducks-historic,media/volunteers_bucks_for_ducks_ticket_mailing.jpg,Volunteer mailing party for Bucks for Ducks tickets
+bucks-for-ducks-current,media/bucks_for_ducks_2015.jpg,Bucks for Ducks 2015
+bucks-for-ducks-current,art_bucks_for_ducks_2015.jpg,
+plein-air-painting,media/art_plein_air_painting.jpg,
+plein-air-painting,media/art_bucks_for_ducks_2010.jpg,
+birds-grassland,media/grassland_meadowlark_joy_elson.jpg,
+birds-grassland,media/phoebe.jpg,
+birds-shorebirds,media/seasonal_pond_curlew.jpg,Long-billed curlew
+birds-shorebirds,media/dfeliz_nesting_stilt.jpg,"Black-necked stilt, nesting"
+birds-shorebirds,media/greater_yellowlegs.jpg,Greater yellowlegs
+birds-egrets-etc,media/sl_pond_egret.jpg,© Skyler Lewis
+birds-egrets-etc,media/dfeliz_egret.jpg,Great Egret (Dave Feliz)
+birds-egrets-etc,media/dfeliz_pelicans.jpg,Pelicans (Dave Feliz)
