@@ -300,7 +300,6 @@ $(window).on('load', function() {
         class: 'chapter-container'
       });
 
-
       // Add media and credits: YouTube, audio, or image
       var media = null;
       var mediaContainer = null;
@@ -312,19 +311,6 @@ $(window).on('load', function() {
           class: 'source'
         }).append(c['Media Credit'])
       }
-      /*if (c['Media Credit Link']) {
-        source = $('<a>', {
-          text: c['Media Credit'],
-          href: c['Media Credit Link'],
-          target: "_blank",
-          class: 'source'
-        });
-      } else {
-        source = $('<span>', {
-          text: c['Media Credit'],
-          class: 'source'
-        });
-      }*/
 
       // YouTube or Google Drive video embed
       if (c['Media Link'] 
@@ -344,41 +330,7 @@ $(window).on('load', function() {
         }).append(media).after(source);
       }
 
-      // Gallery in media link
-      /*
-      if (c['Media Link'] && c['Media Link'].substring(0, 1) == '[') {
-        mediaContainer = $('<div></div>', {
-          class: 'gallery-container'
-        })
-
-        var galleryItems = JSON.parse(c['Media Link']);
-        
-        for (i in galleryItems) {
-          media = $('<img>', {
-            src: galleryItems[i],
-            alt: c['Chapter'],
-            class: i == 0 ? 'gallery-first-item' : 'gallery-other-item',
-          });  
-
-          var enableLightbox = getSetting('_enableLightbox') === 'yes' ? true : false;
-          if (enableLightbox) {
-            var lightboxWrapper = $('<a></a>', {
-              'data-lightbox': galleryItems,
-              'href': galleryItems[i],
-              // 'data-title': c['Chapter'],
-              // 'data-alt': c['Chapter'],
-            });
-            media = lightboxWrapper.append(media);
-          };
-          
-          mediaContainer.append(media);
-
-        }
-
-        mediaContainer.after(source);
-      } */
-
-      // Gallery v2
+      // Gallery
       if (c['Media Link'] && c['Media Link'].substring(0, 8) == 'gallery:') {
         mediaContainer = $('<div></div>', {
           class: 'gallery-container'
@@ -387,13 +339,13 @@ $(window).on('load', function() {
         var galleryId = c['Media Link'].substring(8,);
         var galleryItems = g[galleryId];
         
-        for (i in galleryItems) {
+        for (item in galleryItems) {
           media = $('<img>', {
             //'src': "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E",
             //'data-src': galleryItems[i]['Image'],
-            'src': galleryItems[i]['Image'],
+            'src': galleryItems[item]['Image'],
             'loading': 'lazy',
-            'alt': galleryItems[i]['Caption'],
+            'alt': galleryItems[item]['Caption'],
             'class': i == 0 ? 'gallery-first-item' : 'gallery-other-item',
           });  
 
@@ -401,9 +353,9 @@ $(window).on('load', function() {
           if (enableLightbox) {
             var lightboxWrapper = $('<a></a>', {
               'data-lightbox': galleryId,
-              'href': galleryItems[i]['Image'],
-              'data-alt': galleryItems[i]['Caption'],
-              'data-title': galleryItems[i]['Caption'],
+              'href': galleryItems[item]['Image'],
+              'data-alt': galleryItems[item]['Caption'],
+              'data-title': galleryItems[item]['Caption'],
             });
             media = lightboxWrapper.append(media);
           };
