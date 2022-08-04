@@ -606,8 +606,10 @@ $(window).on('load', function() {
             $('#non-map-content').show();
           }
           
-          // Remove GeoJson overlay layer(s) existing
-          jsonLayers.clearLayers();
+          // Remove GeoJson overlay layer(s) existing (unless there is no marker)
+          if (c['Longitude']) {
+            jsonLayers.clearLayers();
+          }
           //if (map.hasLayer(geoJsonOverlay)) {
           //  map.removeLayer(geoJsonOverlay);
           //}
@@ -706,7 +708,7 @@ $(window).on('load', function() {
 
             if (map.hasLayer(overlay)) {
               
-              // currentTileUrl = overlay.getUrl(); // need to figure out how to get tile URL
+              var currentTileUrl = overlay.getTileUrl(); // BETA
               var currentTileUrl = null;
 
               var maxNativeZoomLevel = c['Max Native Zoom'] ? parseInt(c['Max Native Zoom']) : MAX_ZOOM;
@@ -733,9 +735,11 @@ $(window).on('load', function() {
             overlay.setOpacity(c['Tile Overlay Opacity'] ? c['Tile Overlay Opacity'] : 1);
             
           } else {
-            // remove the overlay layer if it's not needed
+            // remove the overlay layer if it's not needed (keep it if the next slide is faded out)
             if (map.hasLayer(overlay)) {
-              map.removeLayer(overlay);
+              if (c['Longitude']) {
+                map.removeLayer(overlay);
+              }
             }
           }
 
