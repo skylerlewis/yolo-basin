@@ -824,33 +824,6 @@ $(window).on('load', function() {
       });
     }
 
-    // On first load, check hash and if it contains an number > 1, scroll down, else update map from initial location
-    if ((!parseInt(location.hash.slice(1))) | parseInt(location.hash.slice(1))==1) {
-      updateMap(initial = true);
-    } else {
-      var containerId = parseInt(location.hash.slice(1)) - 1;
-      if (containerId > 0) {
-        var target = $('#container' + containerId).offset().top - titleHeight - navHeight - scrollThreshold; //- 120;
-        // scroll to 120 pixels from top of scroll area
-        $('#contents').animate({
-          scrollTop: target 
-        }, 0) // getDuration(target, '#contents', 0.5));
-    }
-    } 
-
-    // Add Google Analytics if the ID exists
-    var ga = getSetting('_googleAnalytics');
-    if ( ga && ga.length >= 10 ) {
-      var gaScript = document.createElement('script');
-      gaScript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=' + ga);
-      document.head.appendChild(gaScript);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', ga);
-    }
-
     // Create tooltips for birds
     $('.taxon').each(function() {
       var taxon = $(this).attr('data-taxon');
@@ -879,6 +852,34 @@ $(window).on('load', function() {
       .append(tooltipImage);
       $(this).append(tooltip);
     });
+
+    // On first load, check hash and if it contains an number > 1, scroll down, else update map from initial location
+    if ((!parseInt(location.hash.slice(1))) | parseInt(location.hash.slice(1))==1) {
+      updateMap(initial = true);
+    } else {
+      var containerId = parseInt(location.hash.slice(1)) - 1;
+      if (containerId > 0) {
+        var target = $('#container' + containerId).offset().top - titleHeight - navHeight - scrollThreshold; //- 120;
+        // scroll to 120 pixels from top of scroll area
+        $('#contents').animate({
+          scrollTop: target 
+        }, 0) // getDuration(target, '#contents', 0.5));
+    }
+    } 
+
+    // Add Google Analytics if the ID exists
+    var ga = getSetting('_googleAnalytics');
+    if ( ga && ga.length >= 10 ) {
+      var gaScript = document.createElement('script');
+      gaScript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=' + ga);
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', ga);
+    }
+
 
   }
 
