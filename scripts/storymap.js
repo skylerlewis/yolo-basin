@@ -706,31 +706,31 @@ $(window).on('load', function() {
           // Add chapter's overlay tiles if specified in options
           if (c['Tile Overlay']) {
 
+            var maxNativeZoomLevel = c['Max Native Zoom'] ? parseInt(c['Max Native Zoom']) : MAX_ZOOM;
+            var overlayParams = {
+              pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane', // need to fix: pane not correctly adding
+              detectRetina: DETECT_RETINA,
+              maxNativeZoom: DETECT_RETINA ? (L.Browser.retina ? (maxNativeZoomLevel - 1) : maxNativeZoomLevel) : maxNativeZoomLevel,
+            }
+
+            
             if (map.hasLayer(overlay)) {
-              
-              var currentTileUrl = overlay.getTileUrl(); // BETA
-              var currentTileUrl = null;
+              //var currentTileUrl = overlay.getTileUrl(0,0,0);
+              //alert(currentTileUrl);
 
-              var maxNativeZoomLevel = c['Max Native Zoom'] ? parseInt(c['Max Native Zoom']) : MAX_ZOOM;
-              var overlayParams = {
-                pane: c['Top Level Overlay'] ? 'topTilePane' : 'tilePane',
-                detectRetina: DETECT_RETINA,
-                maxNativeZoom: DETECT_RETINA ? (L.Browser.retina ? (maxNativeZoomLevel - 1) : maxNativeZoomLevel) : maxNativeZoomLevel,
-              }
-              
-              // var tileUrlRetina = c['Tile Overlay Retina'] ? c['Tile Overlay Retina'] : c['Tile Overlay'];
-              // var tileUrl = DETECT_RETINA ? (L.Browser.retina ? tileUrlRetina : c['Tile Overlay']) : c['Tile Overlay'];
-
-              if (c['Tile Overlay'] != currentTileUrl) {
+              //if (c['Tile Overlay'] != currentTileUrl) {
                 map.removeLayer(overlay);
                 overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
                 overlay.addTo(map);
-              }
+              // } 
+              // else {
+              //   // no need to do anything if the correct layer already exists
+              // };
 
             } else {
               overlay = L.tileLayer(c['Tile Overlay'], overlayParams);
               overlay.addTo(map);
-            }
+            };
             
             overlay.setOpacity(c['Tile Overlay Opacity'] ? c['Tile Overlay Opacity'] : 1);
             
