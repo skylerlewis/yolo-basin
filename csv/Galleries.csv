@@ -10,7 +10,6 @@ clinton-walk,media/dedication/clinton3.jpg,Courtesy of Davis Enterprise
 clinton-walk,media/dedication/dedication4.jpg,
 demowetlands,media/discover_demowetlands.jpg,
 demowetlands,media/education1.jpg,
-demowetlands,media/education2.jpg,
 demowetlands,media/education3.jpg,
 education,media/schoolbus.jpg,
 education,media/discover_ybwa.jpg,
@@ -39,9 +38,6 @@ rice,media/dwr_photos/PJH_Yolo_Bypass-0229.jpg,Sep 2009 (Paul J Hames / CA DWR)
 rice-flooded,media/rice_flooding.jpg,
 rice-flooded,media/dwr_photos/SP_Yolo_Bypass-0265.jpg,Mar 2007 (Steve Payer / CA DWR)
 rice-flooded,media/geese_rice_field.jpg,
-brood-ponds,media/dwr_photos/PJH_Yolo_Bypass-0155.jpg,Sep 2009 (Paul J Hames / CA DWR)
-brood-ponds,media/dwr_photos/PJH_Yolo_Bypass-0176.jpg,Sep 2009 (Paul J Hames / CA DWR)
-brood-ponds,media/brood_pond_gallinule_michael_reinhart.jpg,Gallinule in a brood pond (Michael Reinhart)
 signing-ceremony,media/planning7_signing.jpg,
 signing-ceremony,media/signing_event.jpg,
 signing-ceremony,media/scans/doc_signing_map.jpg,
@@ -62,6 +58,7 @@ demowetlands-history,media/demo_wetland2.jpg,
 demowetlands-history,media/scans/scan0103_pano_demowetland.jpg,
 hq-history,media/scans/scan9703_hq.jpg,
 hq-history,media/scans/scan9702_hq_sign.jpg,
+early-ybwg,media/kitchen_table.jpg,
 early-ybwg,media/scans/doc_volunteer_flyer_masked.jpg,
 early-ybwg,media/scans/scan9401_tabling.jpg,
 early-ybwg,media/scans/scan9402_tabling.jpg,
@@ -79,6 +76,7 @@ duckdays-current,media/duck_days_art_show_2015.jpg,
 putahcreek,media/scans/scan9601_putah.jpg,
 putahcreek,media/scans/scan9907_aerial_putahck.jpg,
 putahcreek,media/scans/scan9403_putah_flood.jpg,
+putahcreek,media/toe_drain.jpg,toe drain
 riparian-restoration,media/scans/scan9603_riparian.jpg,
 riparian-restoration,media/scans/scan9605_riparian.jpg,
 riparian-restoration,media/scans/scan9704_riparian.jpg,
@@ -135,17 +133,106 @@ seasonal-pond-succession,media/seasonal_pond_dry.jpg,Seasonal ponds fully dry
 seasonal-pond-succession,media/seasonal_pond_lotA_spring_dowingia.jpg,"The seasonal pond near Lot A in the spring, with blooming dowingia in the background"
 seasonal-pond-succession,media/seasonal_pond_fall_floodup.jpg,Fall flood-up of seasonal ponds
 seasonal-pond-succession,media/seasonal_pond_winter_flooding.jpg,Winter flooding of seasonal ponds
+seasonal-pond-succession,media/mreinhart/seasonal_pond_snow_geese.jpg,Seasonal pond with snow geese (courtesy Michael Reinhart)
 bucks-for-ducks-historic,media/bucks_for_ducks_91.jpg,Publicity photo for first Bucks for Ducks (1991) with Gary Sandy and Robin Kulakow
 bucks-for-ducks-historic,media/volunteers_bucks_for_ducks_ticket_mailing.jpg,Volunteer mailing party for Bucks for Ducks tickets
 bucks-for-ducks-current,media/bucks_for_ducks_2015.jpg,Bucks for Ducks 2015
-bucks-for-ducks-current,art_bucks_for_ducks_2015.jpg,
+bucks-for-ducks-current,media/art_bucks_for_ducks_2015.jpg,
 plein-air-painting,media/art_plein_air_painting.jpg,
 plein-air-painting,media/art_bucks_for_ducks_2010.jpg,
 birds-grassland,media/grassland_meadowlark_joy_elson.jpg,
+birds-grassland,media/mreinhart/lark_sparrow.jpg,Lark sparrow (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/horned_lark.jpg,Horned lark (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/golden_crowned_sparrow.jpg,Golden-crowned sparrow (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/lark_sparrow_grasslands.jpg,Lark sparrow in grasslands (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/horned_lark_grassland.jpg,Horned lark in grasslands (courtesy Michael Reinhart)
 birds-grassland,media/phoebe.jpg,
+birds-rails,media/mreinhart/gallinule.jpg,Gallinule (courtesy Michael Reinhart)
+birds-rails,media/mreinhart/gallinule_family.jpg,Gallinule family (courtesy Michael Reinhart)
+birds-rails,media/mreinhart/gallinule_family_broodpond_lotE.jpg,Gallinule family in the brood pond near Parking Lot E (courtesy Michael Reinhart)
+birds-tule,media/sl_tule_rwbs.jpg,Red-winged blackbird © Skyler Lewis
+birds-tule,media/mreinhart/red_winged_blackbird.jpg,Red-winged blackbird (courtesy Michael Reinhart)
+birds-tule,media/mreinhart/red_winged_blackbirds_murmuration.jpg,Red-winged blackbird murmuration (courtesy Michael Reinhart)
+birds-tule,media/mreinhart/yellow_headed_blackbird_song.jpg,Yellow-headed blackbird (courtesy Michael Reinhart)
+birds-tule,media/mreinhart/yellow_headed_blackbirds.jpg,Yellow-headed blackbirds (courtesy Michael Reinhart)
+birds-tule,media/mreinhart/savannah_sparrow.jpg,Savannah sparrow (courtesy Michael Reinhart)
+birds-dabblers,media/dfeliz_ducks.jpg,
+birds-dabblers,media/mreinhart/northern_pintail.jpg,Northern pintail (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/cinnamon_teal.jpg,Cinnamon teal (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/northern_pintail_pair.jpg,Northern pintail (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/northern_shoveler.jpg,Northern shoveler (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/mallards.jpg,Mallard (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/green_winged_teal.jpg,Green-winged Teal (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/american_widgeon_pair.jpg,American widgeon (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/mallards_flight.jpg,Mallards in flight (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/northern_shoveler_pair.jpg,Northern shoveler (courtesy Michael Reinhart)
+birds-dabblers,media/mreinhart/greenwinged_cinnamon_teal.jpg,Green-winged and Cinnamon Teal (courtesy Michael Reinhart)
+birds-divers,media/mreinhart/bufflehead_pair.jpg,Bufflehead ducks (courtesy Michael Reinhart)
+birds-divers,media/mreinhart/canvasback_male.jpg,"Canvasback, male (courtesy Michael Reinhart)"
+birds-divers,media/mreinhart/ruddy_duck.jpg,Ruddy duck (courtesy Michael Reinhart)
+birds-divers,media/mreinhart/ring_necked_duck.jpg,Ring-necked duck (courtesy Michael Reinhart)
+birds-divers,media/mreinhart/canvasback_female.jpg,"Canvasback, female (courtesy Michael Reinhart)"
+birds-divers,media/mreinhart/bufflehead_males.jpg,"Bufflehead ducks, males (courtesy Michael Reinhart)"
+,media/mreinhart/wood_ducks.jpg,Wood ducks (rare visitors at the YBWA) (courtesy Michael Reinhart)
+,media/mreinhart/wood_duck_pair.jpg,Wood ducks (rare visitors at the YBWA) (courtesy Michael Reinhart)
+birds-coots-grebes,media/mreinhart/american_coots_2.jpg,American coots (courtesy Michael Reinhart)
+birds-coots-grebes,media/mreinhart/american_coots.jpg,American coots (courtesy Michael Reinhart)
+birds-coots-grebes,media/mreinhart/pied_billed_grebes.jpg,Pied-billed grebes (courtesy Michael Reinhart)
+birds-coots-grebes,media/mreinhart/pied_billed_grebe_family.jpg,Pied-billed grebes (courtesy Michael Reinhart)
+birds-egrets-etc,media/sl_pond_egret.jpg,© Skyler Lewis
+birds-egrets-etc,media/dfeliz_egret.jpg,Great Egret (Dave Feliz)
+birds-egrets-etc,media/mreinhart/snowy_egrets.jpg,Snowy egrets (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/great_blue_heron.jpg,Great blue heron (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/great_egret.jpg,Great egret (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/black_crowned_night_heron_willow.jpg,Black-crowned night heron (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/snowy_egrets_seasonal_pond.jpg,Snowy egrets on a seasonal pond (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/great_blue_heron_closeup.jpg,Great blue heron (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/great_egret_fishing.jpg,Great egret (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/black_crowned_night_heron_juvenile.jpg,"Black-crowned night heron, juvenile (courtesy Michael Reinhart)"
+birds-egrets-etc,media/mreinhart/american_bittern_2.jpg,American bittern (courtesy Michael Reinhart)
+birds-egrets-etc,media/mreinhart/american_bittern.jpg,American bittern (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/tundra_swan.jpg,Tundra swan (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/tundra_swans_flooded_rice.jpg,Tundra swans in flooded rice (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/white_fronted_geese.jpg,White-fronted geese (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/white_fronted_geese_pond.jpg,White-fronted geese (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/snow_geese.jpg,Snow geese and other geese (courtesy Michael Reinhart)
+birds-geese-swans,media/mreinhart/snow_geese_seasonal.jpg,"Snow geese, seasonal, including a snow goose with blue variation (courtesy Michael Reinhart)"
+birds-shorebirds,media/mreinhart/shorebirds_flight.jpg,(courtesy Michael Reinhart)
 birds-shorebirds,media/seasonal_pond_curlew.jpg,Long-billed curlew
 birds-shorebirds,media/dfeliz_nesting_stilt.jpg,"Black-necked stilt, nesting"
 birds-shorebirds,media/greater_yellowlegs.jpg,Greater yellowlegs
-birds-egrets-etc,media/sl_pond_egret.jpg,© Skyler Lewis
-birds-egrets-etc,media/dfeliz_egret.jpg,Great Egret (Dave Feliz)
-birds-egrets-etc,media/dfeliz_pelicans.jpg,Pelicans (Dave Feliz)
+birds-shorebirds,media/mreinhart/american_avocets.jpg,American avocets (courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/american_avocets_breeding_plumage.jpg,American avocets in breeding plumage (courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/black_necked_stilt.jpg,Black-necked stilt (courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/black_necked_stilt_group.jpg,Black-necked stilts (courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/western_sandpipers.jpg,Western sandpipers (courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/willet_or_dowitcher.jpg,(courtesy Michael Reinhart)
+birds-shorebirds,media/mreinhart/long_billed_dowitcher_or_dunlin.jpg,(courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/savannah_sparrow_2.jpg,Savannah sparrow (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/white_crowned_sparrow.jpg,White-crowned sparrow (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/white_crowned_sparrow_2.jpg,White-crowned sparrow (courtesy Michael Reinhart)
+birds-grassland,media/mreinhart/golden_crowned_sparrow_2.jpg,Golden-crowned sparrow (courtesy Michael Reinhart)
+birds-raptors,media/redtailedhawk_sign.jpg,
+birds-raptors,media/mreinhart/red_tailed_hawk.jpg,Red-tailed hawk (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/red_tailed_hawk_flight.jpg,Red-tailed hawk (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/swainsons_hawk_fledgling_nest2.jpg,Swainson's hawk fledgling (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/swainsons_hawk_flight.jpg,Swainson's hawk (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/swainsons_hawk_tree.jpg,Swainson's hawk (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/white_tailed_kite.jpg,White-tailed kite (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/white_tailed_kite_flight.jpg,White-tailed kite (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/osprey_shorebird_pond5.jpg,Osprey at the shorebird pond (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/osprey_flight1.jpg,Osprey (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/osprey_flight2.jpg,Osprey (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/northern_harrier.jpg,Northern harrier (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/northern_harrier_wetland.jpg,Northern harrier (courtesy Michael Reinhart)
+birds-sea,media/mreinhart/double_crested_cormorant.jpg,Double-crested cormorant (courtesy Michael Reinhart)
+birds-sea,media/mreinhart/double_crested_cormorants_2.jpg,Double-crested cormorant (courtesy Michael Reinhart)
+birds-sea,media/dfeliz_pelicans.jpg,American white pelicans (Dave Feliz)
+wildflower-tour,media/wildflowertour.jpg,
+wildflower-tour,media/tidytips.jpg,
+wildflower-tour,media/tule_ranch_open_house_1.jpg,
+wildflower-tour,media/tule_ranch_open_house_2.jpg,
+wildflower-tour,media/tule_ranch_open_house_rancher.jpg,
+lisbon-weir,media/lisbon_weir.jpg,
+lisbon-weir,media/lisbon_weir_plan.png,
+lisbon-weir,media/research_lisbon_weir_fyke_trap.jpg,
