@@ -7,13 +7,13 @@ clinton,media/scans/doc_dedication_remarks.jpg,
 clinton,media/scans/doc_dedication_pamphlet_front.jpg,
 clinton,media/scans/doc_dedication_pamphlet_inside.jpg,
 clinton-walk,media/dedication/clinton3.jpg,Courtesy of Davis Enterprise
-clinton-walk,media/dedication/dedication4.jpg,
+clinton-walk,media/dedication/dedication4.jpg,"Terry Colborn, John Keper and Robin Kulakow"
 demowetlands,media/discover_demowetlands.jpg,
 demowetlands,media/education1.jpg,
 demowetlands,media/education3.jpg,
 education,media/schoolbus.jpg,
 education,media/discover_ybwa.jpg,
-localsupport,media/planning4_vicfazio.jpg,
+localsupport,media/planning4_vicfazio.jpg,"Congressman Vic Fazio speaking at a field trip on the Yolo Bypass levee, future home of the Yolo Bypass Wildlife Area"
 localsupport,media/planning3_betsymarchand.jpg,
 flood-control-structures,media/dwr_photos/PJH_Fremont_Weir-0054.jpg,"Fremont Weir with Yolo Bypass to the left, Sacramento River to the right (Paul J Hames / CA DWR)"
 flood-control-structures,media/dwr_photos/1920_01_30_zz_000926_Sac_Weir.jpg,"Sacramento Weir shortly after construction, 1921 (CA DWR)"
@@ -100,8 +100,8 @@ drainage,media/drainage/drainage_map.jpg,Map of selected drainage improvements
 drainage,media/drainage/photo_ricecorner2.jpg,Drainage improvements underway at Rice Corner
 drainage,media/drainage/drainage_y_project_2020_1.jpg,"Drainage improvements underway at the ""Y"""
 drainage,media/drainage/drainage_y_project_2020_3.jpg,"Drainage improvements underway at the ""Y"""
-drainage,media/drainage/drainage_flyer_1.png,Flyer describing drainage improvement project
-drainage,media/drainage/drainage_flyer_2.png,Flyer describing drainage improvement project
+drainage,media/drainage/drainage_flyer1.png,Flyer describing drainage improvement project
+drainage,media/drainage/drainage_flyer2.png,Flyer describing drainage improvement project
 realignment,media/realignment/map_2010-03.jpg,
 realignment,media/realignment/map_2014-10.jpg,
 realignment,media/realignment/map_2015-02.jpg,
@@ -121,6 +121,8 @@ discover-the-flyway,media/discover_flyway_field_trip.jpg,
 discover-the-flyway,media/discover_flyway_wellies.jpg,
 discover-the-flyway,media/discover_volunteers_2008.jpg,
 bat-tours,media/bat_tour_corky.jpg,
+bat-tours,media/sl_bat_flyout.jpg,© Skyler Lewis
+bat-tours,media/bats_expansion_joint.jpg,
 bat-tours,media/bat_sticker.png,
 bat-tours,media/bats1.jpg,
 bat-tours,media/bat_shirt.jpg,
@@ -225,6 +227,8 @@ birds-raptors,media/mreinhart/osprey_flight1.jpg,Osprey (courtesy Michael Reinha
 birds-raptors,media/mreinhart/osprey_flight2.jpg,Osprey (courtesy Michael Reinhart)
 birds-raptors,media/mreinhart/northern_harrier.jpg,Northern harrier (courtesy Michael Reinhart)
 birds-raptors,media/mreinhart/northern_harrier_wetland.jpg,Northern harrier (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/great_horned_owl.jpg,Great horned owl (courtesy Michael Reinhart)
+birds-raptors,media/mreinhart/great_horned_owl_2.jpg,Great horned owl (courtesy Michael Reinhart)
 birds-sea,media/mreinhart/double_crested_cormorant.jpg,Double-crested cormorant (courtesy Michael Reinhart)
 birds-sea,media/mreinhart/double_crested_cormorants_2.jpg,Double-crested cormorant (courtesy Michael Reinhart)
 birds-sea,media/dfeliz_pelicans.jpg,American white pelicans (Dave Feliz)
