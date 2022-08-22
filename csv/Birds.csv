@@ -16,7 +16,7 @@ cintea,Cinnamon Teal,Spatula cyanoptera,Spatula,cyanoptera,plate-313-blue-winged
 amewig,American Wigeon,Mareca americana,Mareca,americana,plate-345-american-widgeon
 gnwtea,Green-winged Teal,Anas crecca,Anas,crecca,plate-228-green-winged-teal
 grbher3,Great Blue Heron,Ardea herodias,Ardea,herodias,plate-211-great-blue-heron
-brebla,Brewer's Blackbird,Euphagus cyanocephalus,Euphagus,cyanocephalus,
+brebla,Brewer's Blackbird,Euphagus cyanocephalus,Euphagus,cyanocephalus,plate-157-rusty-grakle
 amekes,American Kestrel,Falco sparverius,Falco,sparverius,
 whtkit,White-tailed Kite,Elanus leucurus,Elanus,leucurus,plate-352-black-winged-hawk
 marwre,Marsh Wren,Cistothorus palustris,Cistothorus,palustris,plate-100-marsh-wren
@@ -41,7 +41,7 @@ calgul,California Gull,Larus californicus,Larus,californicus,
 pibgre,Pied-billed Grebe,Podilymbus podiceps,Podilymbus,podiceps,plate-248-american-pied-billed
 cangoo,Canada Goose,Branta canadensis,Branta,canadensis,
 lobcur,Long-billed Curlew,Numenius americanus,Numenius,americanus,plate-231-long-billed-curlew
-gocspa,Golden-crowned Sparrow,Zonotrichia atricapilla,Zonotrichia,atricapilla,
+gocspa,Golden-crowned Sparrow,Zonotrichia atricapilla,Zonotrichia,atricapilla,sketch-golden-crowned-sparrow
 turvul,Turkey Vulture,Cathartes aura,Cathartes,aura,
 ribgul,Ring-billed Gull,Larus delawarensis,Larus,delawarensis,
 moudov,Mourning Dove,Zenaida macroura,Zenaida,macroura,
@@ -73,7 +73,7 @@ rinduc,Ring-necked Duck,Aythya collaris,Aythya,collaris,plate-234-ring-necked-du
 rosgoo,Ross's Goose,Anser rossii,Anser,rossii,plate-381-snow-goose
 lessca,Lesser Scaup,Aythya affinis,Aythya,affinis,plate-229-scaup-duck
 logshr,Loggerhead Shrike,Lanius ludovicianus,Lanius,ludovicianus,
-horlar,Horned Lark,Eremophila alpestris,Eremophila,alpestris,
+horlar,Horned Lark,Eremophila alpestris,Eremophila,alpestris,plate-200-shore-lark
 eargre,Eared Grebe,Podiceps nigricollis,Podiceps,nigricollis,
 amegfi,American Goldfinch,Spinus tristis,Spinus,tristis,
 virrai,Virginia Rail,Rallus limicola,Rallus,limicola,plate-205-virginia-rail
@@ -150,7 +150,7 @@ norshr4,Northern Shrike,Lanius borealis,Lanius,borealis,
 oaktit,Oak Titmouse,Baeolophus inornatus,Baeolophus,inornatus,
 gockin,Golden-crowned Kinglet,Regulus satrapa,Regulus,satrapa,
 buggna,Blue-gray Gnatcatcher,Polioptila caerulea,Polioptila,caerulea,
-larspa,Lark Sparrow,Chondestes grammacus,Chondestes,grammacus,
+larspa,Lark Sparrow,Chondestes grammacus,Chondestes,grammacus,plate-390-lark-finch
 mutswa,Mute Swan,Cygnus olor,Cygnus,olor,
 wesgre,Western Grebe,Aechmophorus occidentalis,Aechmophorus,occidentalis,
 margod,Marbled Godwit,Limosa fedoa,Limosa,fedoa,plate-238-great-marbled-godwit
