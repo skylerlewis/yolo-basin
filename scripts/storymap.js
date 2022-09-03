@@ -228,6 +228,7 @@ $(window).on('load', function() {
     var geoJsonOverlay2;
 
     var headingList = [];
+    var subheadingList = [];
 
     // propagate chapters: if each chapter doesn't have a heading, use the last non-null heading
     for (i in chapters) {
@@ -316,6 +317,7 @@ $(window).on('load', function() {
       if (c['Media Link'] 
       && (c['Media Link'].indexOf('youtube.com/') > -1 | c['Media Link'].indexOf('drive.google.com/file/') > -1)
       ) {
+        // media = $('<div>', {class: 'hytPlayerWrap'}).append(
         media = $('<iframe></iframe>', {
           src: c['Media Link'],
           width: '100%',
@@ -324,9 +326,11 @@ $(window).on('load', function() {
           allow: 'autoplay; encrypted-media',
           allowfullscreen: 'allowfullscreen',
         });
+        //);
 
         mediaContainer = $('<div></div>', {
           class: 'img-container'
+        // class: 'img-container hytPlayerWrapOuter'
         }).append(media).after(source);
       }
 
@@ -421,6 +425,7 @@ $(window).on('load', function() {
       };
       if (c['Subchapter']) {
         container.append('<h3 class="chapter-subheader">' + c['Subchapter'] + '</h3>');
+        subheadingList.push({'index': i, 'sectionIndex': headingIndex ,'name': c['Chapter']});
       };
       container
         .append(media ? mediaContainer : '')
