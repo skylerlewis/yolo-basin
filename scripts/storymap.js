@@ -101,10 +101,10 @@ $(window).on('load', function() {
     // future edit: all types of items to different panes, to facilitate stacking
     map.getPane('labelPane').style.pointerEvents = 'none';
 
-    stamenLinesUrlBase = 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-lines/{z}/{x}/{y}';
+    stamenLinesUrlBase = 'https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}';
     stamenLinesUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
     var stamenLines = L.tileLayer(stamenLinesUrlBase + stamenLinesUrlSuffix, {
-      attribution: '© OpenStreetMap, © Stamen',
+      attribution: '© Stadia Maps, © Stamen Design, © OpenMapTiles, © OpenStreetMap contributors',
       subdomains: 'abcd',
       ext: 'png',
       pane: 'labelPane',
