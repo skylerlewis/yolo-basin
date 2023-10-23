@@ -101,24 +101,23 @@ $(window).on('load', function() {
     // future edit: all types of items to different panes, to facilitate stacking
     map.getPane('labelPane').style.pointerEvents = 'none';
 
-    stamenLinesUrlBase = 'https://tiles.stadiamaps.com/tiles/stamen_terrain_lines/{z}/{x}/{y}';
-    stamenLinesUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
-    var stamenLines = L.tileLayer(stamenLinesUrlBase + stamenLinesUrlSuffix, {
-      attribution: '© Stadia Maps, © Stamen Design, © OpenMapTiles, © OpenStreetMap contributors',
-      subdomains: 'abcd',
+    referenceOverlayUrlBase = 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{z}/{y}/{x}';
+    referenceOverlayUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
+    var referenceOverlay = L.tileLayer(referenceOverlayUrlBase + referenceOverlayUrlSuffix, {
+      attribution: 'Reference tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
       ext: 'png',
       pane: 'labelPane',
       opacity: 0.5,
     });
-    stamenLines.addTo(map);
-    positronUrlBase = 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}';
-    positronUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
-    var positronLabels = L.tileLayer(positronUrlBase + positronUrlSuffix, {
-      attribution: '© CartoDB',
-      pane: 'labelPane',
-      opacity: 0.75,
-    });
-    positronLabels.addTo(map);
+    referenceOverlay.addTo(map);
+    // positronUrlBase = 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}';
+    // positronUrlSuffix = DETECT_RETINA ? (L.Browser.retina ? '@2x.png' : '.png') : '.png';
+    // var positronLabels = L.tileLayer(positronUrlBase + positronUrlSuffix, {
+    //   attribution: '© CartoDB',
+    //   pane: 'labelPane',
+    //   opacity: 0.75,
+    // });
+    // positronLabels.addTo(map);
 
     // also create a pane for overlays that need to go on top of labels
     // fmi https://leafletjs.com/reference.html#map-pane
